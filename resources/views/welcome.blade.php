@@ -1,234 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
 
-@include('header')
-    <!----------- MAIN section start ----------->
-    <main>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Landing Page</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+        integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
 
-        <!----------- STEPS section start ----------->
-        <section id="steps">
-            <article style="background-color: #5acda6;">
-                <figure>
-                    <i class="fa fa-cut"></i>
-                    <figcaption>
-                        <h3>Step 01</h3>
-                        <p>Vegetables are an integral part of the human diet. They are extremely useful because of the
-                            high content of carbohydrates, various acids, vitamins and active elements in the form, easy
-                            for digestion.</p>
-                    </figcaption>
-                </figure>
-            </article>
-            <article style="background-color: #91ac41;">
-                <figure>
-                    <i class="fa fa-paint-brush"></i>
-                    <figcaption>
-                        <h3>Step 02.</h3>
-                        <p>Fresh tomatoes are ideal for replenishing the loss of minerals. These vegetables contain a
-                            lot of acids that our body needs for full-fledged work.</p>
-                    </figcaption>
-                </figure>
-            </article>
-            <article style="background-color: #e4b476;">
-                <figure>
-                    <i class="fa fa-shopping-bag"></i>
-                    <figcaption>
-                        <h3>Step 03.</h3>
-                        <p>In the content of vitamin C, sweet peppers are superior to lemons and even black currants!
-                            The greatest amount of vitamin is contained around the stalk, that is, in the part of the
-                            product that is usually cut during cleaning.</p>
-                    </figcaption>
-                </figure>
-            </article>
-            <article style="background-color: #f69dad;">
-                <figure>
-                    <i class="far fa-smile"></i>
-                    <figcaption>
-                        <h3>Step 04.</h3>
-                        <p>If you sometimes eat hot chili peppers, this will help normalize cerebral circulation, ease
-                            the condition with bronchial asthma, cough, sore throat, flu.</p>
-                    </figcaption>
-                </figure>
-            </article>
-        </section>
-        <!----------- COMMENTS section end ----------->
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
 
-        <!----------- STORE section start ----------->
-        <section id="store">
-            <p class="italic-par">Fresh Food</p>
-            <h2>Our Vegan Store!</h2>
-            <p id="gray-desc">Radish contains a lot of fiber, pectin and mineral salts.</p>
+    body {
+        background-image: url("https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcTkGLodTVQ2X9wTGCjMff2chrUJmN9CEXUPx0koWM4r6gQ8-rHR");
+        height: 100vh;
+        width: 100vw;
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
 
-            <div id="store-items">
-                <article>
-                    <div>
-                        <i class="fa fa-camera"></i>
-                    </div>
-                    <h3>Fresh Vegetables</h3>
-                    <p>Use for cooking several types of vegetable oil.</p>
-                </article>
-                <article>
-                    <div>
-                        <i class="fa-rocket fa"></i>
-                    </div>
-                    <h3>High Quality</h3>
-                    <p>This is the best source of essential fatty acids for the body.</p>
-                </article>
-                <article>
-                    <div>
-                        <i class="fab fa-twitter"></i>
-                    </div>
-                    <h3>Sale</h3>
-                    <p>It is very good, if in the kitchen there will always be several bottles with different oils.</p>
-                </article>
-                <article>
-                    <div>
-                        <i class="fab fa-weixin"></i>
-                    </div>
-                    <h3>Best Price</h3>
-                    <p>Remember that unrefined oils are not suitable for
-                </article>
-            </div>
+    .nav__container {
+        height: 10vh;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+    }
 
-        </section>
-        <!----------- STORE section end ----------->
+    .nav__container .logo {
+        color: #ddd;
+        font-size: 1.5rem;
+        font-weight: 500;
+        user-select: none;
+        font-variant: small-caps;
+    }
 
-        <!----------- COMMENTS section start ----------->
-        <section id="comments">
-            <p class="italic-par">Fresh Food</p>
-            <h2>Our Vegan Shop!</h2>
-            <p id="gray-desc">According to experts, any habit can be formed in 21 days. The same statement applies to
-                healthy eating.</p>
+    .nav__container .menu {
+        display: flex;
+        justify-content: space-between;
+    }
 
-            <div id="comments-items">
-                <article>
-                    <img src="https://mobirise.com/extensions/organicamp/assets/images/face5.jpg" alt="Veronica King">
-                    <p>Sales consultants are very polite. Many of the products have tried and are ready to prompt and
-                        recommend to customers. The staff shows that they completely share the philosophy of proper
-                        nutrition, if you can say so.</p>
-                    <h3>Veronica King</h3>
-                    <p>Cook</p>
-                </article>
-                <article>
-                    <img src="https://mobirise.com/extensions/organicamp/assets/images/face6.jpg" alt="Jim Cash">
-                    <p>The assortment is very wide. From useful organic oils, cereals and teas to specific products for
-                        vegetarians, such as sausages and pies without meat.</p>
-                    <h3>Jim Cash</h3>
-                    <p>Seller</p>
-                </article>
-                <article>
-                    <img src="https://mobirise.com/extensions/organicamp/assets/images/face7.jpg" alt="Peter Goodman">
-                    <p>I want to say a huge thank you to the management of the store and all its employees, I'm not a
-                        vegetarian, it would seem that the store is not for me, but it's not so, any person who comes
-                        here will find something useful.</p>
-                    <h3>Peter Goodman</h3>
-                    <p>Manager</p>
-                </article>
-            </div>
+    .nav__container .menu a {
+        padding-left: 5rem;
+        color: #ddd;
+        font-size: 1.3rem;
+        text-decoration: none;
+    }
 
-        </section>
-        <!----------- COMMENTS section end ----------->
+    .nav__container .search input[type=search] {
+        height: 5vh;
+        width: 17vw;
+        background-color: transparent;
+        border: none;
+        outline: none;
+        border-radius: 15px;
+        box-shadow: 0px 0px 2px 2px #985BC4;
+        color: #ddd;
+        font-size: 1.1rem;
+        padding-left: 0.5rem;
+    }
 
-        <!----------- FOLLOW section start ----------->
-        <section id="follow">
-            <div id="left-bar">
-                <img src="https://mobirise.com/extensions/organicamp/assets/images/19.jpg" alt="Strawberries">
-            </div>
-            <div id="right-bar">
-                <h2>Follow Us</h2>
-                <p>A wide range of products; many unusual and tasty products; courteous staff.</p>
-                <form>
-                    <div>
-                        <input type="email" name="email" placeholder="Your Email" id="email">
-                    </div>
-                    <div>
-                        <input type="submit" name="submit" value="SUBSCRIBE" id="submit-btn">
-                    </div>
-                </form>
-            </div>
-        </section>
-        <!----------- FOLLOW section end ----------->
+    .nav__container .search input[type=search]::placeholder {
+        color: #ddd;
+        font-size: 1.1rem;
+        padding-left: 1.1rem;
+    }
 
-        <!----------- Stats section start ----------->
-        <section id="rates">
-            <div id="rates-wrap">
-                <div class="rates-block">
-                    <h3>7</h3>
-                    <p>Year of experiences</p>
-                </div>
-                <div class="rates-block">
-                    <h3>123k</h3>
-                    <p>Happy Customers</p>
-                </div>
-                <div class="rates-block">
-                    <h3>72k</h3>
-                    <p>100% Satisfaction</p>
-                </div>
-                <div class="rates-block">
-                    <h3>13k</h3>
-                    <p>Detox Smoothies</p>
-                </div>
-            </div>
-        </section>
-        <!----------- STATS section end ----------->
+    .nav__container .search input[type=search]:hover {
+        box-shadow: 0px 0px 2px 2px #ACF1FC;
+    }
 
-        <!----------- VIDEO section start ----------->
-        <section id="vimeo">
-            <div>
-                <h2>Vimeo Video</h2>
-                <iframe src="https://player.vimeo.com/video/275412279"></iframe>
-            </div>
-        </section>
-        <!----------- VIDEO section end ----------->
+    .container {
+        height: 90vh;
+        padding: 10rem;
+    }
 
-        <section id="contacts">
-            <div id="contacts-wrap">
-                <div class="left-block">
-                    <p class="italic-par">Contact Us</p>
-                    <h2>Address Information</h2>
-                    <p class="contacts-desc">Overeating is one of the most common causes of overweight and digestive
-                        problems.</p>
-                    <h4>London Store</h4>
-                    <p class="contacts-break">
-                        Roeterseiland Campus Building E <br>
-                        6th floor London<br>
-                        Monday to Friday : 9am to 8pm<br>
-                        examplemail.mail.com
-                    </p>
-                    <h4>Berlin Store</h4>
-                    <p class="contacts-break">
-                        Roeterseiland Campus Building E<br>
-                        6th floor London<br>
-                        Monday to Friday : 9am to 8pm<br>
-                        examplemail.mail.com
-                    </p>
-                </div>
+    .container h1 {
+        color: #1C4E93;
+        font-size: 6rem;
+        user-select: none;
+        text-shadow: 1px 1px 2rem #A565D0;
+    }
 
-                <div class="right-block">
-                    <p class="italic-par">Meet Our Team</p>
-                    <h2>Get In Touch</h2>
-                    <p class="contacts-desc">The task of proper nutrition - to remove from the diet harmful food and
-                        enrich it useful.</p>
-                    <form>
-                        <div>
-                            <input class="input-item" type="text" name="name" placeholder="Name">
-                        </div>
-                        <div>
-                            <input class="input-item" type="tel" name="phone" placeholder="Phone">
-                        </div>
-                        <div>
-                            <input class="input-item" type="text" name="subject" placeholder="Subject">
-                        </div>
-                        <div>
-                            <input class="input-item" type="email" name="email" placeholder="Email">
-                        </div>
-                        <div>
-                            <textarea class="input-item" placeholder="Message"></textarea>
-                        </div>
-                        <div>
-                            <input id="btn-submit" type="submit" name="submit" value="Submit Now">
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </section>
+    .container p {
+        width: 35vw;
+        color: #ddd;
+        line-height: 1.8rem;
+        padding-top: 2rem;
+    }
+
+    .container button {
+        margin-top: 2rem;
+        height: 5vh;
+        width: 12vw;
+        display: block;
+        background-color: transparent;
+        border: none;
+        outline: none;
+        border-radius: 15px;
+        box-shadow: 0px 0px 2px 2px #985BC4;
+        color: #ddd;
+        font-size: 1.1rem;
+        font-weight: 900;
+        text-shadow: 1px 1px 1px #000;
+    }
+
+    .container button:hover {
+        box-shadow: 0px 0px 2px 2px #ACF1FC;
+    }
+
+    .container .icons {
+        margin-top: 4rem;
+        width: auto;
+        height: auto;
+    }
+
+    .container .icons i {
+        width: auto;
+        height: 4vh;
+        font-size: 1.4rem;
+        border-radius: 8px;
+        padding: 8px;
+        margin: 0.5rem;
+        box-shadow: 0px 0px 2px 2px #985BC4;
+        color: #AEF3FF;
+    }
+
+    .container .icons i:hover {
+        box-shadow: 0px 0px 2px 2px #ACF1FC;
+    }
+
+    @media screen and (max-width: 450px) {
+        body .nav__container {
+            display: flex;
+            justify-content: space-evenly;
+        }
+
+        body .nav__container .menu {
+            display: none;
+        }
+
+        body .nav__container .search {
+            width: 80%;
+            height: auto;
+        }
+
+        body .nav__container .search input[type=search] {
+            height: 5vh;
+            width: auto;
+        }
+
+        body .container {
+            height: 90vh;
+            padding: 1.5rem;
+            margin-top: 8rem;
+        }
+
+        body .container h1 {
+            color: #1C4E93;
+            font-size: 3.5rem;
+            user-select: none;
+            text-shadow: 1px 1px 2rem #A565D0;
+        }
+
+        body .container p {
+            width: 90%;
+            color: #ddd;
+            line-height: 1.8rem;
+            padding-top: 2rem;
+            text-shadow: 1px 1px 1px #3c0364;
+        }
+
+        body .container button {
+            margin-top: 2rem;
+            height: 5vh;
+            width: 40vw;
+            font-size: 1.1rem;
+            font-weight: 900;
+            text-shadow: 1px 1px 1px #000;
+        }
+
+        body .container .icons {
+            margin-top: 8rem;
+            width: auto;
+            height: auto;
+            display: flex;
+            justify-content: space-evenly;
+        }
+
+        body .container .icons i {
+            height: auto;
+            width: auto;
+            font-size: 1.4rem;
+            border-radius: none;
+            padding: none;
+            margin: none;
+            box-shadow: 0px 0px 2px 2px #985BC4;
+            color: #AEF3FF;
+        }
+    }
+
+    /*# sourceMappingURL=style.css.map */
+</style>
+
+<body>
+    <div class="nav__container">
+        <div class="logo">Monktail Solution</div>
+        <div class="menu">
+            <a href="/">Home</a>
+            <a href="{{ route('superamdin.login') }}">Super Admin</a>
+            <a href="#">Others</a>
+        </div>
+        <div class="search">
+            <input type="search" name="" id="" placeholder="Search..." autocomplete="false">
+        </div>
+    </div>
+    <main class="container">
+        <h1>Technology</h1>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus quam repellat alias dolor, praesentium
+            asperiores dolores voluptatem molestiae molestias enim ipsa! Officia nobis adipisci, sit quasi illo cumque
+            odio eos.
+        </p>
+        <button>More info...</button>
+        <div class="icons">
+            <i class="fa-brands fa-facebook"></i>
+            <i class="fa-brands fa-youtube"></i>
+            <i class="fa-brands fa-twitter"></i>
+            <i class="fa-brands fa-instagram"></i>
+        </div>
     </main>
-    <!----------- MAIN section end ----------->
-@include('footer')
+</body>
+
+</html>

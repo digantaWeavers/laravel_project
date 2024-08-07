@@ -1,0 +1,1 @@
+<h1>This Is Super Admin {{ Auth::user()->id }}</h1>
