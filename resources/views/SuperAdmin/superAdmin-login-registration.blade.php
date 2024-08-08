@@ -28,12 +28,13 @@
             <h2>Register</h2>
             <form action="{{ route('superadmin.register') }}" method="POST">
                 @csrf
-                <select hidden name="user_role" id="user_role" class="form-control">
+                {{-- <select hidden name="user_role" id="user_role" class="form-control">
                     <option value="Super Admin" selected>Super Admin</option>
                     <option value="Manager">Manager</option>
                     <option value="Team Lead">Team Lead</option>
                     <option value="Employee">Employee</option>
-                </select>
+                </select> --}}
+                <input type="hidden" name="user_role" id="user_role" value="Super Admin">
                 @error('user_role')
                     <div class="text-danger">{{ $message }}</div>
                 @enderror

@@ -81,7 +81,7 @@
                         </li>
 
                         <li>
-                            <a class="dropdown-item" href="setting.html">
+                            <a class="dropdown-item" href="{{ route('superamdin.prodile.settings') }}">
                                 <i class="bi-gear me-2"></i>
                                 Settings
                             </a>
@@ -105,27 +105,27 @@
                 <div class="position-sticky py-4 px-3 sidebar-sticky">
                     <ul class="nav flex-column h-100">
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="index.html">
+                            <a class="nav-link @if(Route::currentRouteName() =='logincheck') active @endif" aria-current="page" href="{{ route('logincheck') }}">
                                 <i class="bi-house-fill me-2"></i>
                                 Overview
                             </a>
                         </li>
 
-                        <li class="nav-item">
-                            <a class="nav-link" href="profile.html">
+                        <li class="nav-item border-top mt-auto pt-2">
+                            <a class="nav-link @if(Route::currentRouteName() =='superamdin.prodile') active @endif" href="{{ route('superamdin.prodile') }}">
                                 <i class="bi-person me-2"></i>
                                 Profile
                             </a>
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link" href="setting.html">
+                            <a class="nav-link @if(Route::currentRouteName() =='superamdin.prodile.settings') active @endif" href="{{ route('superamdin.prodile.settings') }}">
                                 <i class="bi-gear me-2"></i>
                                 Settings
                             </a>
                         </li>
 
-                        <li class="nav-item border-top mt-auto pt-2">
+                        <li class="nav-item">
                             <a class="nav-link" href="{{ route('superadmin.logout') }}">
                                 <i class="bi-box-arrow-left me-2"></i>
                                 Logout

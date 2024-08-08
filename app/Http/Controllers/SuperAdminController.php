@@ -8,6 +8,11 @@ use Illuminate\Support\Facades\Auth;
 
 class SuperAdminController extends Controller
 {
+    // super admin login register blade file view
+    public function superAdminView(){
+        return view('SuperAdmin/superAdmin-login-registration');
+    }
+
     // super admin register
     public function SuperAdminRegistration(Request $request){
 
@@ -92,8 +97,19 @@ class SuperAdminController extends Controller
         }
     }
 
+    // super admin logout
     public function superAdminLogout(){
         Auth::logout();
         return redirect()->route('superamdin.login')->with('loginsuccess', 'Logout Successfull');
+    }
+
+    // profile settings view
+    public function profileSettingsView(){
+        return view('SuperAdmin/profile-settings');
+    }
+
+    // profile settings view
+    public function profileView(){
+        return view('SuperAdmin/profile');
     }
 }

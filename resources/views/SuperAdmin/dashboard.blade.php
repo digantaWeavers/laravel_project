@@ -66,7 +66,7 @@
                         <img src="{{ asset('/storage/' . $user->product_image) }}" class="profile-image img-fluid"
                             alt="Profile Picture">
                     @endif
-                    <a href="setting.html" class="bi-pencil-square custom-block-edit-icon"></a>
+                    <a href="{{ route('superamdin.prodile.settings') }}" class="bi-pencil-square custom-block-edit-icon"></a>
                 </div>
 
                 <p class="d-flex flex-wrap mb-2">
