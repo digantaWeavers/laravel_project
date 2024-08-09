@@ -29,4 +29,7 @@ Route::controller(SuperAdminController::class)->group(function(){
 
     Route::get('superadmin/profile', 'profileView')->name('superamdin.prodile'); // super admin view
 
+    Route::post('superadmin/{id}/profile/update', 'superAdminProfileUpdate')->name('superadmin.profile.update');    // super admin profile update
+
+    Route::post('superadmin/{id}/password/update', 'superAdminPasswordUpdate')->name('superadmin.password.update');    // super admin profile update
 });

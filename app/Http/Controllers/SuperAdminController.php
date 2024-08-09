@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class SuperAdminController extends Controller
 {
@@ -111,5 +112,62 @@ class SuperAdminController extends Controller
     // profile settings view
     public function profileView(){
         return view('SuperAdmin/profile');
+    }
+
+    // super admin profile update
+    public function superAdminProfileUpdate(Request $request, $id){
+        $profilePicture = $request->file('profilepicture')->store('image', 'public');
+
+        $superAdminProfile = User::where('id', $id)->update([
+            'fullname' => $request->fullname,
+            'username' => $request->username,
+            'emailaddress' => $request->emailaddress,
+            'mobileno' => $request->phonenumber,
+            'profilepic' => $profilePicture
+        ]);
+
+        if($superAdminProfile){
+            return back()->with('success', 'Profile Update Successfull');
+        }else{
+            return back()->with('error', 'Profile Update Failed');
+        }
+    }
+
+    // superadmin password change
+    public function superAdminPasswordUpdate(Request $request, $id){
+        $request->validate([
+            'oldpassword' => 'required',
+            'password' => 'required|confirmed',
+            'password_confirmation' => 'required'
+        ],[
+            'oldpassword.required' => 'Current Password Should Be Filed',
+            'password.required' => 'Password Should Be Filed',
+            'password.confirmed' => 'Password & Confirm Password Should Be Same',
+            'password_confirmation.required' => 'Confirm Password Should Be Filed'
+        ]);
+
+        $oldPasswordGet = User::where('id', $id)->first();
+
+        $dbOldPassword = $oldPasswordGet->password; // db old password
+
+        $oldPassword = $request->oldpassword;   // field old password
+
+        $password = $request->password; // new password
+
+        if(! Hash::check($oldPassword, $dbOldPassword)){
+            return back()->with('error', 'old password Dosen\'t match');
+        }else{
+            $passwordUpdate = User::where('id', $id)->update([
+                'password' => Hash::make($password)
+            ]);
+
+            if($passwordUpdate){
+                Auth::logout();
+                return redirect()->route('superamdin.login')->with('success', 'Password Updated Successfull');
+            }else{
+                return back()->with('error', 'Password Not Update');
+            }
+        }
+
     }
 }

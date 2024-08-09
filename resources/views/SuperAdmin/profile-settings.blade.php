@@ -10,6 +10,16 @@
     <div class="row my-4">
         <div class="col-lg-7 col-12">
             <div class="custom-block bg-white">
+                @session('success')
+                    <div class="alert alert-success" role="alert">
+                        {{ session('success') }}
+                    </div>
+                @endsession
+                @session('error')
+                    <div class="alert alert-danger" role="alert">
+                        {{ session('error') }}
+                    </div>
+                @endsession
                 <ul class="nav nav-tabs" id="myTab" role="tablist">
                     <li class="nav-item" role="presentation">
                         <button class="nav-link active" id="profile-tab" data-bs-toggle="tab"
@@ -30,23 +40,28 @@
                         aria-labelledby="profile-tab" tabindex="0">
                         <h6 class="mb-4">User Profile</h6>
 
-                        <form class="custom-form profile-form" action="#" method="post" role="form">
-                            <input type="text" class="form-control" name="fullname" placeholder="Full Name" value="{{ $user->fullname }}" />
+                        <form class="custom-form profile-form" action="{{ route('superadmin.profile.update', $user->id) }}" method="post" role="form" enctype="multipart/form-data">
+                            @csrf
+                            <input type="text" class="form-control" name="fullname" placeholder="Full Name"
+                                value="{{ $user->fullname }}" />
                             @error('fullname')
                                 <div class="text-danger">{{ $message }}</div>
                             @enderror
 
-                            <input type="text" class="form-control" name="username" placeholder="Username" value="{{ $user->username }}" />
+                            <input type="text" class="form-control" name="username" placeholder="Username"
+                                value="{{ $user->username }}" />
                             @error('username')
                                 <div class="text-danger">{{ $message }}</div>
                             @enderror
 
-                            <input type="email" class="form-control" name="emailaddress" placeholder="Email Address" value="{{ $user->emailaddress }}" />
+                            <input type="email" class="form-control" name="emailaddress" placeholder="Email Address"
+                                value="{{ $user->emailaddress }}" />
                             @error('emailaddress')
                                 <div class="text-danger">{{ $message }}</div>
                             @enderror
 
-                            <input type="text" class="form-control" name="phonenumber" placeholder="Mobile Number" value="{{ $user->mobileno }}" />
+                            <input type="text" class="form-control" name="phonenumber" placeholder="Mobile Number"
+                                value="{{ $user->mobileno }}" />
                             @error('phonenumber')
                                 <div class="text-danger">{{ $message }}</div>
                             @enderror
@@ -56,11 +71,11 @@
                                     <img src="https://cdn.pixabay.com/photo/2015/03/04/22/35/avatar-659652_640.png"
                                         class="profile-image img-fluid imagePreview" alt="Dummy Image">
                                 @else
-                                    <img src="{{ asset('/storage/' . $user->product_image) }}" class="profile-image img-fluid imagePreview"
-                                        alt="Profile Picture">
+                                    <img src="{{ asset('/storage/' . $user->profilepic) }}"
+                                        class="profile-image img-fluid imagePreview" alt="Profile Picture">
                                 @endif
 
-                                <input type="file" class="form-control" id="inputGroupFile02">
+                                <input type="file" class="form-control" name="profilepicture" id="inputGroupFile02">
                             </div>
 
                             <div class="d-flex">
@@ -75,22 +90,27 @@
                         tabindex="0">
                         <h6 class="mb-4">Password</h6>
 
-                        <form class="custom-form password-form" action="#" method="post" role="form">
-                            <input type="password" name="password" id="password" pattern="[0-9a-zA-Z]{4,10}"
-                                class="form-control" placeholder="Current Password" required="">
+                        <form class="custom-form password-form" action="{{ route('superadmin.password.update', $user->id) }}" method="post" role="form" id="passwordreset">
+                            @csrf
+                            <input type="password" name="oldpassword" id="password" class="form-control" placeholder="Current Password">
+                            @error('oldpassword')
+                                <div class="text-danger">{{ $message }}</div>
+                            @enderror
 
-                            <input type="password" name="confirm_password" id="confirm_password"
-                                pattern="[0-9a-zA-Z]{4,10}" class="form-control" placeholder="New Password"
-                                required="">
+                            <input type="password" name="password" id="password" class="form-control" placeholder="New Password">
+                            @error('password')
+                                <div class="text-danger">{{ $message }}</div>
+                            @enderror
 
-                            <input type="password" name="confirm_password" id="confirm_password"
-                                pattern="[0-9a-zA-Z]{4,10}" class="form-control" placeholder="Confirm Password"
-                                required="">
+                            <input type="password" name="password_confirmation" id="confirm_password" class="form-control" placeholder="Confirm Password">
+                            @error('password_confirmation')
+                                <div class="text-danger">{{ $message }}</div>
+                            @enderror
 
                             <div class="d-flex">
-                                <button type="button" class="form-control me-3">
+                                {{-- <button type="button" id="reset" class="form-control me-3">
                                     Reset
-                                </button>
+                                </button> --}}
 
                                 <button type="submit" class="form-control ms-2">
                                     Update Password
@@ -137,19 +157,22 @@
 
 @include('SuperAdmin/footer')
 
-{{-- <script>
-    jQuery(document).ready(function ($) {
-        if (input.files && input.files[0]) {
-            var reader = new FileReader();
-            reader.onload = function(e) {
-                $('.imagePreview').css('background-image', 'url('+e.target.result +')');
-                $('.imagePreview').hide();
-                $('.imagePreview').fadeIn(650);
+<script>
+    jQuery(document).ready(function($) {
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    $('.imagePreview').attr('src', e.target.result);
+                    $('.imagePreview').hide();
+                    $('.imagePreview').fadeIn(650);
+                }
+                reader.readAsDataURL(input.files[0]);
             }
-            reader.readAsDataURL(input.files[0]);
         }
+
         $("#inputGroupFile02").change(function() {
             readURL(this);
         });
     });
-</script> --}}
+</script>
