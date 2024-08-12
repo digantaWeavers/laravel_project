@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\SuperAdminController;
 use Illuminate\Support\Facades\Route;
 
@@ -8,9 +9,9 @@ Route::get('/', function () {
 });
 
 // super admin view
-// Route::get('superadmin/login', function(){
-//     return view('SuperAdmin/superAdmin-login-registration');
-// })->name('superamdin.login');
+Route::get('superadmin/projects', function(){
+    return view('SuperAdmin/projects-add');
+})->name('superamdin.projects');
 
 
 // Super Admin Controller Group 
@@ -33,3 +34,5 @@ Route::controller(SuperAdminController::class)->group(function(){
 
     Route::post('superadmin/{id}/password/update', 'superAdminPasswordUpdate')->name('superadmin.password.update');    // super admin profile update
 });
+
+Route::resource('/project', ProjectController::class);

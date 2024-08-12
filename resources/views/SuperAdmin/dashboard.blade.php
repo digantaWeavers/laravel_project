@@ -17,7 +17,7 @@
                         <div class="card-body">
                             <h5 class="card-title">Total Projects</h5>
                             <p class="card-text">10</p>
-                            <a href="" class="btn btn-info"><i class="bi-plus"></i> Add Project</a>
+                            {{-- <a href="" class="btn btn-info"><i class="bi-plus"></i> Add Project</a> --}}
                         </div>
                     </div>
                 </div>
@@ -27,7 +27,7 @@
                         <div class="card-body">
                             <h5 class="card-title">Total Managers</h5>
                             <p class="card-text">20</p>
-                            <a href="" class="btn btn-info"><i class="bi-plus"></i> Add Manager</a>
+                            {{-- <a href="" class="btn btn-info"><i class="bi-plus"></i> Add Manager</a> --}}
                         </div>
                     </div>
                 </div>
@@ -39,7 +39,7 @@
                         <div class="card-body">
                             <h5 class="card-title">Total TeamLeads</h5>
                             <p class="card-text">10</p>
-                            <a href="" class="btn btn-info"><i class="bi-plus"></i> Add Lead</a>
+                            {{-- <a href="" class="btn btn-info"><i class="bi-plus"></i> Add Lead</a> --}}
                         </div>
                     </div>
                 </div>
@@ -49,7 +49,7 @@
                         <div class="card-body">
                             <h5 class="card-title">Total Employees</h5>
                             <p class="card-text">20</p>
-                            <a href="" class="btn btn-info"><i class="bi-plus"></i> Add Employee</a>
+                            {{-- <a href="" class="btn btn-info"><i class="bi-plus"></i> Add Employee</a> --}}
                         </div>
                     </div>
                 </div>

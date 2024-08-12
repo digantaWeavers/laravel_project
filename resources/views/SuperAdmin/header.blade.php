@@ -17,6 +17,8 @@
 
     <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@300;400;700&display=swap" rel="stylesheet">
 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/datepicker/1.0.10/datepicker.min.css">
+
     <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
 
     <link href="{{ asset('css/bootstrap-icons.css') }}" rel="stylesheet">
@@ -74,7 +76,7 @@
                         </li>
 
                         <li>
-                            <a class="dropdown-item" href="profile.html">
+                            <a class="dropdown-item" href="{{ route('superamdin.prodile') }}">
                                 <i class="bi-person me-2"></i>
                                 Profile
                             </a>
@@ -105,21 +107,28 @@
                 <div class="position-sticky py-4 px-3 sidebar-sticky">
                     <ul class="nav flex-column h-100">
                         <li class="nav-item">
-                            <a class="nav-link @if(Route::currentRouteName() =='logincheck') active @endif" aria-current="page" href="{{ route('logincheck') }}">
+                            <a class="nav-link @if(Route::currentRouteName() == 'logincheck') active @endif" aria-current="page" href="{{ route('logincheck') }}">
                                 <i class="bi-house-fill me-2"></i>
                                 Overview
                             </a>
                         </li>
 
+                        <li class="nav-item">
+                            <a class="nav-link @if(Route::currentRouteName() == 'superamdin.projects') active @endif" href="{{ route('superamdin.projects') }}">
+                                <i class="bi-wallet me-2"></i>
+                                Projects
+                            </a>
+                        </li>
+
                         <li class="nav-item border-top mt-auto pt-2">
-                            <a class="nav-link @if(Route::currentRouteName() =='superamdin.prodile') active @endif" href="{{ route('superamdin.prodile') }}">
+                            <a class="nav-link @if(Route::currentRouteName() == 'superamdin.prodile') active @endif" href="{{ route('superamdin.prodile') }}">
                                 <i class="bi-person me-2"></i>
                                 Profile
                             </a>
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link @if(Route::currentRouteName() =='superamdin.prodile.settings') active @endif" href="{{ route('superamdin.prodile.settings') }}">
+                            <a class="nav-link @if(Route::currentRouteName() == 'superamdin.prodile.settings') active @endif" href="{{ route('superamdin.prodile.settings') }}">
                                 <i class="bi-gear me-2"></i>
                                 Settings
                             </a>
