@@ -13,6 +13,11 @@ Route::get('superadmin/projects', function(){
     return view('SuperAdmin/projects-add');
 })->name('superamdin.projects');
 
+// super admin view
+Route::get('superadmin/mangers/add', function(){
+    return view('SuperAdmin/manager-add');
+})->name('superamdin.manager.list');
+
 
 // Super Admin Controller Group 
 Route::controller(SuperAdminController::class)->group(function(){
@@ -33,6 +38,10 @@ Route::controller(SuperAdminController::class)->group(function(){
     Route::post('superadmin/{id}/profile/update', 'superAdminProfileUpdate')->name('superadmin.profile.update');    // super admin profile update
 
     Route::post('superadmin/{id}/password/update', 'superAdminPasswordUpdate')->name('superadmin.password.update');    // super admin profile update
+
+    Route::get('superadmin/manager/list', 'managerListSuperAdmin')->name('superadmin.manager.list.view');    // super admin manager list view
+
+    Route::post('/superadmin/manager/add', 'SuperAdminManagerRegistration')->name('superadmin.manager.add.success'); // data insert
 });
 
 Route::resource('/project', ProjectController::class);

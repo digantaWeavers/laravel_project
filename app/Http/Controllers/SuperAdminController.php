@@ -170,4 +170,89 @@ class SuperAdminController extends Controller
         }
 
     }
+
+    // all manager lis view in super admin
+    public function managerListSuperAdmin(){
+        $managers = User::where('userrole', 'Manager')->get();
+        return view('SuperAdmin/manager-list', compact('managers'));
+    }
+
+    // super admin add others
+    public function SuperAdminManagerRegistration(Request $request){
+
+        // form validation
+        $request->validate([
+            'user_role' => 'required',
+            'fullname' => 'required|max:200',
+            'username' => 'required|max:20|unique:users,username',
+            'emailaddress' => 'required|unique:users,emailaddress|email',
+            'phonenumber' => 'required|unique:users,mobileno|digits:10|numeric',
+            'password' => 'required|confirmed',
+            'password_confirmation' => 'required',
+            'altemailaddress' => 'unique:users,alternativeemail|email',
+            'altphonenumber' => 'unique:users,alternativephone|numeric',
+            'address' => 'required',
+            'dob' => 'required',
+            'marriedstatus' => 'required',
+            'addharno' => 'required|digits:12|numeric',
+            'pancard' => 'required',
+            'depertmeny' => 'required',
+            'location' => 'required',
+            'designation' => 'required',
+            'emptype' => 'required',
+            'empstatus' => 'required',
+            'hire' => 'required',
+            'doj' => 'required'
+        ],[
+            'user_role.required' => 'User Role is Required.',
+            'fullname.required' => 'Name is Required.',
+            'fullname.max' => 'Name should be maximum 200 Character.',
+            'username.required' => 'Username is Required.',
+            'username.max' => 'Username size should be 20 character',
+            'username.unique' => 'Username Already Exists',
+            'emailaddress.required' => 'Email Address is Required.',
+            'emailaddress.unique' => 'Email Address Already Exists.',
+            'emailaddress.email' => 'Email Address formate is wrong formate.',
+            'phonenumber.required' => 'Mobile Number is Required.',
+            'phonenumber.unique' => 'Mobile Number Already Exists.',
+            'phonenumber.digits' => 'Mobile Number should be 10 charater.',
+            'phonenumber.numeric' => 'Mobile Number should be numeric.',
+            'password.required' => 'Password is Required.',
+            'password.confirmed' => 'Confirm Password Should be same.',
+            'password_confirmation.required' => 'Confirm Password is Reuired'
+        ]);
+
+        $employeeId = 'WW'.rand(001, 100000);
+
+        $superAdmin = User::create([
+            'empId' => $employeeId,
+            'userrole' => $request->user_role,
+            'fullname' => $request->fullname,
+            'username' => $request->username,
+            'emailaddress' => $request->emailaddress,
+            'alternativeemail' => $request->altemailaddress,
+            'mobileno' => $request->phonenumber,
+            'alternativephone' => $request->altphonenumber,
+            'password' => $request->password,
+            'address' => $request->address,
+            'dob' => $request->dob,
+            'marriedstatus' => $request->marriedstatus,
+            'addharno' => $request->addharno,
+            'pancardno' => $request->pancard,
+            'passportno' => $request->passport,
+            'depertment' => $request->depertmeny,
+            'location' => $request->location,
+            'designation' => $request->designation,
+            'emptype' => $request->emptype,
+            'empstatus' => $request->empstatus,
+            'source_hire' => $request->hire,
+            'joinning_date' => $request->doj
+        ]);
+
+        if($superAdmin){
+            return redirect()->route('superamdin.manager.list')->with('success', 'Register Successfull');
+        }else{
+            return back()->with('error', 'Register Unsuccessfull');
+        }
+    }
 }

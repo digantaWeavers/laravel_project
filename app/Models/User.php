@@ -21,9 +21,26 @@ class User extends Authenticatable
         'fullname',
         'username',
         'emailaddress',
+        'alternativeemail',
         'mobileno',
-        'password'
+        'alternativephone',
+        'password',
+        'address',
+        'dob',
+        'marriedstatus',
+        'addharno',
+        'pancardno',
+        'passportno',
+        'depertment',
+        'location',
+        'designation',
+        'emptype',
+        'empstatus',
+        'source_hire',
+        'joinning_date',
     ];
+
+    protected $timestamp = false;
 
     /**
      * The attributes that should be hidden for serialization.

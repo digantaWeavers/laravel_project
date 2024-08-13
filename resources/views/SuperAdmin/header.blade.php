@@ -19,7 +19,11 @@
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/datepicker/1.0.10/datepicker.min.css">
 
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.1.3/css/dataTables.dataTables.css">
+
     <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
+
+    <link href="{{ asset('css/custom.css') }}" rel="stylesheet">
 
     <link href="{{ asset('css/bootstrap-icons.css') }}" rel="stylesheet">
 
@@ -110,6 +114,13 @@
                             <a class="nav-link @if(Route::currentRouteName() == 'logincheck') active @endif" aria-current="page" href="{{ route('logincheck') }}">
                                 <i class="bi-house-fill me-2"></i>
                                 Overview
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link @if((Route::currentRouteName() == 'superadmin.manager.list.view') || (Route::currentRouteName() == 'superamdin.manager.list')) active @endif" aria-current="page" href="{{ route('superadmin.manager.list.view') }}">
+                                <i class="bi-house-fill me-2"></i>
+                                Manager
                             </a>
                         </li>
 

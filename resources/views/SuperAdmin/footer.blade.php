@@ -1,11 +1,22 @@
 <!-- JAVASCRIPT FILES -->
 <script src="{{ asset('js/jquery.min.js') }}"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/datepicker/1.0.10/datepicker.min.js"></script>
+<script src="https://cdn.datatables.net/2.1.3/js/dataTables.js"></script>
 <script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
 <script src="{{ asset('js/apexcharts.min.js') }}"></script>
 <script src="{{ asset('js/custom.js') }}"></script>
 
 <script type="text/javascript">
+    new DataTable('#example', {
+        layout: {
+            bottomEnd: {
+                paging: {
+                    firstLast: false
+                }
+            }
+        }
+    });
+
     var options = {
         series: [13, 43, 22],
         chart: {

@@ -21,7 +21,7 @@
                                 <img src="https://cdn.pixabay.com/photo/2015/03/04/22/35/avatar-659652_640.png"
                                     class="profile-image img-fluid" alt="Dummy Image">
                             @else
-                                <img src="{{ asset('/storage/' . $user->product_image) }}" class="profile-image img-fluid"
+                                <img src="{{ asset('/storage/' . $user->profilepic) }}" class="profile-image img-fluid"
                                     alt="Profile Picture">
                             @endif
 

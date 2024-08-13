@@ -49,6 +49,24 @@
 
                         <p>$280</p>
                     </div>
+
+                    <div class="custom-block-transation-detail-item mt-4 ms-auto me-auto">
+                        <h6>Amounts</h6>
+
+                        <p>$280</p>
+                    </div>
+
+                    <div class="custom-block-transation-detail-item mt-4 ms-auto me-auto">
+                        <h6>Amounts</h6>
+
+                        <p>$280</p>
+                    </div>
+
+                    <div class="custom-block-transation-detail-item mt-4 ms-auto me-auto">
+                        <h6>Amounts</h6>
+
+                        <p>$280</p>
+                    </div>
                 </div>
 
             </div>
