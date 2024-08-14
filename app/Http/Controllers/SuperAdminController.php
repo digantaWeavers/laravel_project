@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\OtherUser;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use App\Mail\WeclcomeManagerMail;
+use Illuminate\Support\Facades\Mail;
 
 class SuperAdminController extends Controller
 {
@@ -171,15 +174,20 @@ class SuperAdminController extends Controller
 
     }
 
-    // all manager lis view in super admin
+    // all manager lis view in super admin manager tab
     public function managerListSuperAdmin(){
-        $managers = User::where('userrole', 'Manager')->get();
+        $managers = OtherUser::where('userrole', 'Manager')->orderBy('id', 'desc')->get();
         return view('SuperAdmin/manager-list', compact('managers'));
     }
 
-    // super admin add others
-    public function SuperAdminManagerRegistration(Request $request){
+    // all manager lis view in super admin project tab
+    public function managerList(){
+        $managers = OtherUser::where('userrole', 'Manager')->orderBy('id', 'desc')->get();
+        return view('SuperAdmin/projects-add', compact('managers'));
+    }
 
+    // super admin add others
+    public function SuperAdminOtherUsersRegistration(Request $request){
         // form validation
         $request->validate([
             'user_role' => 'required',
@@ -188,21 +196,7 @@ class SuperAdminController extends Controller
             'emailaddress' => 'required|unique:users,emailaddress|email',
             'phonenumber' => 'required|unique:users,mobileno|digits:10|numeric',
             'password' => 'required|confirmed',
-            'password_confirmation' => 'required',
-            'altemailaddress' => 'unique:users,alternativeemail|email',
-            'altphonenumber' => 'unique:users,alternativephone|numeric',
-            'address' => 'required',
-            'dob' => 'required',
-            'marriedstatus' => 'required',
-            'addharno' => 'required|digits:12|numeric',
-            'pancard' => 'required',
-            'depertmeny' => 'required',
-            'location' => 'required',
-            'designation' => 'required',
-            'emptype' => 'required',
-            'empstatus' => 'required',
-            'hire' => 'required',
-            'doj' => 'required'
+            'password_confirmation' => 'required'
         ],[
             'user_role.required' => 'User Role is Required.',
             'fullname.required' => 'Name is Required.',
@@ -224,33 +218,26 @@ class SuperAdminController extends Controller
 
         $employeeId = 'WW'.rand(001, 100000);
 
-        $superAdmin = User::create([
+        $addUser = OtherUser::create([
             'empId' => $employeeId,
             'userrole' => $request->user_role,
             'fullname' => $request->fullname,
             'username' => $request->username,
             'emailaddress' => $request->emailaddress,
-            'alternativeemail' => $request->altemailaddress,
             'mobileno' => $request->phonenumber,
-            'alternativephone' => $request->altphonenumber,
             'password' => $request->password,
-            'address' => $request->address,
-            'dob' => $request->dob,
-            'marriedstatus' => $request->marriedstatus,
-            'addharno' => $request->addharno,
-            'pancardno' => $request->pancard,
-            'passportno' => $request->passport,
-            'depertment' => $request->depertmeny,
-            'location' => $request->location,
-            'designation' => $request->designation,
-            'emptype' => $request->emptype,
-            'empstatus' => $request->empstatus,
-            'source_hire' => $request->hire,
-            'joinning_date' => $request->doj
+            'added_by' => $request->added_by
         ]);
 
-        if($superAdmin){
-            return redirect()->route('superamdin.manager.list')->with('success', 'Register Successfull');
+        $toMail = $request->emailaddress;
+        $subject = "Account Created Successfull";
+        $emailAddress = $request->emailaddress;
+        $username = $request->username;
+        $password = $request->password;
+
+        if($addUser){
+            Mail::to($toMail)->send(new WeclcomeManagerMail($subject, $emailAddress, $username, $password));
+            return back()->with('success', 'Register Successfull!');
         }else{
             return back()->with('error', 'Register Unsuccessfull');
         }

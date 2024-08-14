@@ -23,7 +23,7 @@
 
     <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
 
-    <link href="{{ asset('css/custom.css') }}" rel="stylesheet">
+    {{-- <link href="{{ asset('css/custom.css') }}" rel="stylesheet"> --}}
 
     <link href="{{ asset('css/bootstrap-icons.css') }}" rel="stylesheet">
 
@@ -125,7 +125,7 @@
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link @if(Route::currentRouteName() == 'superamdin.projects') active @endif" href="{{ route('superamdin.projects') }}">
+                            <a class="nav-link @if(Route::currentRouteName() == 'superamdin.projects.view.list') active @endif" href="{{ route('superamdin.projects.view.list') }}">
                                 <i class="bi-wallet me-2"></i>
                                 Projects
                             </a>

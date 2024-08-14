@@ -11,9 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->dropColumn('created_at');
-            $table->dropColumn('updated_at');
+        Schema::table('other_users', function (Blueprint $table) {
+            $table->unsignedBigInteger('added_by');
+            $table->foreign('added_by')->references('id')->on('users');
         });
     }
 
@@ -22,8 +22,9 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('users', function (Blueprint $table) {
-            //
+        Schema::table('other_users', function (Blueprint $table) {
+            // $table->dropForeign('added_by_foreign');
+            // $table->dropColumn('added_by');
         });
     }
 };

@@ -144,12 +144,21 @@
                             <label class="form-label">End Date</label>
                             <input type="date" name="enddate" id="enddate" class="form-control">
                         </div>
+                        <div class="col-6">
+                            <label class="form-label">Assigned To:</label>
+                            <select class="form-select" name="paymenttype" aria-label="Default select example">
+                                <option selected>Choose Manager</option>
+                                @foreach ($managers as $manager)
+                                    <option value="{{ $manager->id }}">{{ $manager->fullname }}</option>
+                                @endforeach
+                            </select>
+                        </div>
                     </div>
                 </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Understood</button>
+                <button type="button" class="btn btn-primary">Add Project</button>
             </div>
         </div>
     </div>

@@ -18,11 +18,12 @@
                     </div>
 
                     <div class="ms-auto">
-                        <a class="btn custom-btn" href="{{ route('superamdin.manager.list') }}">Add Manager</a>
+                        <button type="button" class="btn btn-primary custom-btn" data-bs-toggle="modal"
+                            data-bs-target="#staticBackdrop">
+                            Add Manager
+                        </button>
                     </div>
                 </div>
-
-                {{ $managers }}
 
                 @session('success')
                     <div class="alert alert-success" role="alert">
@@ -35,62 +36,50 @@
                     </div>
                 @endsession
 
-                <div class="d-flex flex-wrap align-items-center">
-                    <table id="example" class="display" style="width:100%">
-                        <thead>
+                <table id="example" class="display" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th>Sl No.</th>
+                            <th>Employee ID</th>
+                            <th>Name</th>
+                            <th>Username</th>
+                            <th>Email Id</th>
+                            <th>Phone Number</th>
+                            <th>View</th>
+                            <th>Edit</th>
+                            <th>Delete</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @php
+                            $key = 1;
+                        @endphp
+                        @foreach ($managers as $manager)
                             <tr>
-                                <th>Name</th>
-                                <th>Position</th>
-                                <th>Office</th>
-                                <th>Age</th>
-                                <th>Start date</th>
-                                <th>Salary</th>
+                                <td>{{ $key }}</td>
+                                <td>{{ $manager->empId }}</td>
+                                <td>{{ $manager->fullname }}</td>
+                                <td>{{ $manager->username }}</td>
+                                <td>{{ $manager->emailaddress }}</td>
+                                <td>{{ $manager->mobileno }}</td>
+                                <td>
+                                    <a href=""><i class="bi bi-eye"></i></a>
+                                </td>
+                                <td>
+                                    <a href=""><i class="bi bi-pen"></i></a>
+                                </td>
+                                <td>
+                                    <a href=""><i class="bi bi-trash"></i></a>
+                                </td>
                             </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>Tiger Nixon</td>
-                                <td>System Architect</td>
-                                <td>Edinburgh</td>
-                                <td>61</td>
-                                <td>2011-04-25</td>
-                                <td>$320,800</td>
-                            </tr>
-                            <tr>
-                                <td>Garrett Winters</td>
-                                <td>Accountant</td>
-                                <td>Tokyo</td>
-                                <td>63</td>
-                                <td>2011-07-25</td>
-                                <td>$170,750</td>
-                            </tr>
-                            <tr>
-                                <td>Ashton Cox</td>
-                                <td>Junior Technical Author</td>
-                                <td>San Francisco</td>
-                                <td>66</td>
-                                <td>2009-01-12</td>
-                                <td>$86,000</td>
-                            </tr>
-                            <tr>
-                                <td>Cedric Kelly</td>
-                                <td>Senior Javascript Developer</td>
-                                <td>Edinburgh</td>
-                                <td>22</td>
-                                <td>2012-03-29</td>
-                                <td>$433,060</td>
-                            </tr>
-                            <tr>
-                                <td>Airi Satou</td>
-                                <td>Accountant</td>
-                                <td>Tokyo</td>
-                                <td>33</td>
-                                <td>2008-11-28</td>
-                                <td>$162,700</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
+                            @php
+                                $key++;
+                            @endphp
+                        @endforeach
+                    </tbody>
+                </table>
+                {{-- <div class="d-flex flex-wrap align-items-center">
+                </div> --}}
 
             </div>
         </div>
@@ -127,45 +116,49 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form action="" method="POST">
+                <form action="{{ route('superadmin.others.user.add') }}" method="POST">
                     @csrf
+                    <input type="hidden" name="added_by" id="added_by" value="{{ Auth()->user()->id }}">
                     <input type="hidden" name="user_role" id="user_role" value="Manager">
                     @error('user_role')
                         <div class="text-danger">{{ $message }}</div>
                     @enderror
-                    <input type="text" name="fullname" class="form-control" placeholder="Full Name" value="{{ old('fullname') }}" />
+                    <input type="text" name="fullname" class="form-control" placeholder="Full Name"
+                        value="{{ old('fullname') }}" />
                     @error('fullname')
                         <div class="text-danger">{{ $message }}</div>
                     @enderror
-                    <input type="text" name="username" placeholder="Username" value="{{ old('username') }}" />
+                    <input type="text" name="username" class="form-control" placeholder="Username"
+                        value="{{ old('username') }}" />
                     @error('username')
                         <div class="text-danger">{{ $message }}</div>
                     @enderror
-                    <input type="email" name="emailaddress" placeholder="Email Address"
+                    <input type="email" name="emailaddress" class="form-control" placeholder="Email Address"
                         value="{{ old('emailaddress') }}" />
                     @error('emailaddress')
                         <div class="text-danger">{{ $message }}</div>
                     @enderror
-                    <input type="text" name="phonenumber" placeholder="Mobile Number"
+                    <input type="text" name="phonenumber" class="form-control" placeholder="Mobile Number"
                         value="{{ old('phonenumber') }}" />
                     @error('phonenumber')
                         <div class="text-danger">{{ $message }}</div>
                     @enderror
-                    <input type="password" name="password" placeholder="Create Password"
+                    <input type="password" name="password" class="form-control" placeholder="Create Password"
                         value="{{ old('password') }}" />
                     @error('password')
                         <div class="text-danger">{{ $message }}</div>
                     @enderror
-                    <input type="password" name="password_confirmation" placeholder="Confirm Password" />
+                    <input type="password" name="password_confirmation" class="form-control"
+                        placeholder="Confirm Password" />
                     @error('password_confirmation')
                         <div class="text-danger">{{ $message }}</div>
                     @enderror
-                </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Understood</button>
+                <input type="submit" class="btn btn-primary" value="Add">
             </div>
+            </form>
         </div>
     </div>
 </div>

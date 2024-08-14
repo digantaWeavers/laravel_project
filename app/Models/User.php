@@ -21,23 +21,8 @@ class User extends Authenticatable
         'fullname',
         'username',
         'emailaddress',
-        'alternativeemail',
         'mobileno',
-        'alternativephone',
-        'password',
-        'address',
-        'dob',
-        'marriedstatus',
-        'addharno',
-        'pancardno',
-        'passportno',
-        'depertment',
-        'location',
-        'designation',
-        'emptype',
-        'empstatus',
-        'source_hire',
-        'joinning_date',
+        'password'
     ];
 
     protected $timestamp = false;

@@ -16,7 +16,7 @@
                     </div>
                 </div>
 
-                @session('success')
+                {{-- @session('success')
                     <div class="alert alert-success" role="alert">
                         {{ session('success') }}
                     </div>
@@ -25,10 +25,10 @@
                     <div class="alert alert-danger" role="alert">
                         {{ session('error') }}
                     </div>
-                @endsession
+                @endsession --}}
 
                 <div class="d-flex flex-wrap align-items-center" bis_skin_checked="1">
-                    <form action="{{ route('superadmin.manager.add.success') }}" method="POST">
+                    <form action="" method="POST">
                         @csrf
                         <input type="hidden" name="user_role" id="user_role" value="Manager">
                         <div class="form-info table-sec">
@@ -39,71 +39,71 @@
                                 <div class="col-lg-4">
                                     <div class="form-group">
                                         <input type="text" class="form-control" name="fullname"
-                                            placeholder="Manager Name* " value="{{ old('fullname') }}" />
-                                        @error('fullname')
+                                            placeholder="Manager Name* " value="" />
+                                        {{-- @error('fullname')
                                             <div class="text-danger">{{ $message }}</div>
-                                        @enderror
+                                        @enderror --}}
                                     </div>
                                 </div>
                                 <div class="col-lg-4">
                                     <div class="form-group">
                                         <input type="text" class="form-control" name="username"
-                                            placeholder="Username* " value="{{ old('username') }}" />
-                                        @error('username')
+                                            placeholder="Username* " value="" />
+                                        {{-- @error('username')
                                             <div class="text-danger">{{ $message }}</div>
-                                        @enderror
+                                        @enderror --}}
                                     </div>
                                 </div>
                                 <div class="col-lg-4">
                                     <div class="form-group">
                                         <input type="email" class="form-control" name="emailaddress"
-                                            placeholder="Email Address* " value="{{ old('emailaddress') }}" />
-                                        @error('emailaddress')
+                                            placeholder="Email Address* " value="" />
+                                        {{-- @error('emailaddress')
                                             <div class="text-danger">{{ $message }}</div>
-                                        @enderror
+                                        @enderror --}}
                                     </div>
                                 </div>
                                 <div class="col-lg-4">
                                     <div class="form-group">
                                         <input type="email" class="form-control" name="altemailaddress"
                                             placeholder="Alternative Email Address "
-                                            value="{{ old('altemailaddress') }}" />
+                                            value="" />
                                     </div>
                                 </div>
                                 <div class="col-lg-4">
                                     <div class="form-group">
                                         <input type="text" name="phonenumber" class="form-control"
-                                            placeholder="Mobile Number* " value="{{ old('phonenumber') }}" />
-                                        @error('phonenumber')
+                                            placeholder="Mobile Number* " value="" />
+                                        {{-- @error('phonenumber')
                                             <div class="text-danger">{{ $message }}</div>
-                                        @enderror
+                                        @enderror --}}
                                     </div>
                                 </div>
                                 <div class="col-lg-4">
                                     <div class="form-group">
                                         <input type="text" name="altphonenumber" class="form-control"
                                             placeholder="Alternative Mobile Number "
-                                            value="{{ old('altphonenumber') }}" />
-                                        @error('altphonenumber')
+                                            value="" />
+                                        {{-- @error('altphonenumber')
                                             <div class="text-danger">{{ $message }}</div>
-                                        @enderror
+                                        @enderror --}}
                                     </div>
                                 </div>
                                 <div class="col-lg-12">
                                     <div class="form-group">
-                                        <textarea class="form-control donation-textarea" name="address" placeholder="Address&nbsp;*">{{ old('address') }}</textarea>
-                                        @error('address')
+                                        <textarea class="form-control donation-textarea" name="address" placeholder="Address&nbsp;*"></textarea>
+                                        {{-- @error('address')
                                             <div class="text-danger">{{ $message }}</div>
-                                        @enderror
+                                        @enderror --}}
                                     </div>
                                 </div>
                                 <div class="col-lg-4">
                                     <div class="form-group">
                                         <input type="date" name="dob" class="form-control"
-                                            placeholder="Date Of Birth" value="{{ old('dob') }}">
-                                        @error('dob')
+                                            placeholder="Date Of Birth" value="">
+                                        {{-- @error('dob')
                                             <div class="text-danger">{{ $message }}</div>
-                                        @enderror
+                                        @enderror --}}
                                     </div>
                                 </div>
                                 <div class="col-lg-4">
@@ -113,36 +113,36 @@
                                             <option value="0">Single</option>
                                             <option value="1">Married</option>
                                         </select>
-                                        @error('marriedstatus')
+                                        {{-- @error('marriedstatus')
                                             <div class="text-danger">{{ $message }}</div>
-                                        @enderror
+                                        @enderror --}}
                                     </div>
                                 </div>
                                 <div class="col-lg-4">
                                     <div class="form-group">
                                         <input type="text" name="addharno" class="form-control"
-                                            placeholder="Addharcard No* " value="{{ old('addharno') }}" />
-                                        @error('addharno')
+                                            placeholder="Addharcard No* " value="" />
+                                        {{-- @error('addharno')
                                             <div class="text-danger">{{ $message }}</div>
-                                        @enderror
+                                        @enderror --}}
                                     </div>
                                 </div>
                                 <div class="col-lg-4">
                                     <div class="form-group">
                                         <input type="text" name="pancard" class="form-control"
-                                            placeholder="Pancard No* " value="{{ old('pancard') }}" />
-                                        @error('pancard')
+                                            placeholder="Pancard No* " value="" />
+                                        {{-- @error('pancard')
                                             <div class="text-danger">{{ $message }}</div>
-                                        @enderror
+                                        @enderror --}}
                                     </div>
                                 </div>
                                 <div class="col-lg-4">
                                     <div class="form-group">
                                         <input type="text" name="passport" class="form-control"
-                                            placeholder="Passport No (If Exists) " value="{{ old('passport') }}" />
-                                        @error('passport')
+                                            placeholder="Passport No (If Exists) " value="" />
+                                        {{-- @error('passport')
                                             <div class="text-danger">{{ $message }}</div>
-                                        @enderror
+                                        @enderror --}}
                                     </div>
                                 </div>
                             </div>
@@ -163,17 +163,17 @@
                                         <option value="Sales">Sales</option>
                                         <option value="Others">Others</option>
                                     </select>
-                                    @error('depertmeny')
+                                    {{-- @error('depertmeny')
                                         <div class="text-danger">{{ $message }}</div>
-                                    @enderror
+                                    @enderror --}}
                                 </div>
                             </div>
                             <div class="col-lg-4">
                                 <div class="form-group">
                                     <input type="text" name="location" class="form-control" placeholder="Location " value="{{ old('location') }}" />
-                                    @error('location')
+                                    {{-- @error('location')
                                         <div class="text-danger">{{ $message }}</div>
-                                    @enderror
+                                    @enderror --}}
                                 </div>
                             </div>
                             <div class="col-lg-4">
@@ -185,9 +185,9 @@
                                         <option value="Director of Sales">Director of Sales</option>
                                         <option value="Others">Others</option>
                                     </select>
-                                    @error('designation')
+                                    {{-- @error('designation')
                                         <div class="text-danger">{{ $message }}</div>
-                                    @enderror
+                                    @enderror --}}
                                 </div>
                             </div>
                             <div class="col-lg-4">
@@ -197,9 +197,9 @@
                                         <option value="1">Permanent</option>
                                         <option value="0">Casual</option>
                                     </select>
-                                    @error('emptype')
+                                    {{-- @error('emptype')
                                         <div class="text-danger">{{ $message }}</div>
-                                    @enderror
+                                    @enderror --}}
                                 </div>
                             </div>
                             <div class="col-lg-4">
@@ -209,9 +209,9 @@
                                         <option value="1">Active</option>
                                         <option value="0">Inactive</option>
                                     </select>
-                                    @error('empstatus')
+                                    {{-- @error('empstatus')
                                         <div class="text-danger">{{ $message }}</div>
-                                    @enderror
+                                    @enderror --}}
                                 </div>
                             </div>
                             <div class="col-lg-4">
@@ -222,34 +222,34 @@
                                         <option value="0">Indirect</option>
                                         <option value="2">Reference</option>
                                     </select>
-                                    @error('hire')
+                                    {{-- @error('hire')
                                         <div class="text-danger">{{ $message }}</div>
-                                    @enderror
+                                    @enderror --}}
                                 </div>
                             </div>
                             <div class="col-lg-4">
                                 <div class="form-group">
                                     <input type="date" name="doj" class="form-control"
                                         placeholder="Date of Joining" value="{{ old('doj') }}">
-                                    @error('doj')
+                                    {{-- @error('doj')
                                         <div class="text-danger">{{ $message }}</div>
-                                    @enderror
+                                    @enderror --}}
                                 </div>
                             </div>
                             <div class="col-lg-4">
                                 <div class="form-group">
                                     <input type="password" name="password" class="form-control" placeholder="Create Password" value="{{ old('password') }}" />
-                                    @error('password')
+                                    {{-- @error('password')
                                         <div class="text-danger">{{ $message }}</div>
-                                    @enderror
+                                    @enderror --}}
                                 </div>
                             </div>
                             <div class="col-lg-4">
                                 <div class="form-group">
                                     <input type="password" name="password_confirmation" class="form-control" placeholder="Confirm Password" />
-                                    @error('password_confirmation')
+                                    {{-- @error('password_confirmation')
                                         <div class="text-danger">{{ $message }}</div>
-                                    @enderror
+                                    @enderror --}}
                                 </div>
                             </div>
                         </div>

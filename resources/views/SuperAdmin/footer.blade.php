@@ -17,6 +17,12 @@
         }
     });
 
+    if($('.alert').length > 0){
+        setTimeout(() => {
+            $('.alert').hide();
+        }, 3000);
+    }
+
     var options = {
         series: [13, 43, 22],
         chart: {
