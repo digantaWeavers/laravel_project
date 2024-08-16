@@ -1,6 +1,6 @@
 @include('SuperAdmin/header')
 
-<main class="main-wrapper col-md-9 ms-sm-auto py-4 col-lg-9 px-md-4 border-start">
+<main class="main-wrapper col-md-10 col-lg-10 ms-sm-auto py-4 col-lg-9 px-md-4 border-start">
     <div class="title-group mb-3">
         <h1 class="h2 mb-0">Projects</h1>
     </div>
@@ -18,7 +18,7 @@
                     </div>
 
                     <div class="ms-auto">
-                        <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                        <button type="button" class="btn btn-primary custom-btn" data-bs-toggle="modal"
                             data-bs-target="#staticBackdrop">
                             Add Project
                         </button>
@@ -104,20 +104,21 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form action="" method="POST">
+                <form id="projectaddform" action="" method="POST">
                     @csrf
                     <div class="mb-3">
                         <label class="form-label">Project Name</label>
-                        <input type="text" class="form-control">
+                        <input type="text" name="projectname" id="projectname" class="form-control">
                     </div>
                     <div class="row g-3 align-items-center mb-3">
                         <div class="col-6">
                             <label class="form-label">Client Name</label>
-                            <input type="text" class="form-control">
+                            <input type="text" name="client_name" id="client_name" class="form-control">
                         </div>
                         <div class="col-6">
                             <label class="form-label">Techonology</label>
-                            <select class="form-select" name="techonology" aria-label="Default select example">
+                            <select class="form-select" name="techonology" id="techonology"
+                                aria-label="Default select example">
                                 <option selected>Choose Techonology</option>
                                 <option value="Wordpress">Wordpress</option>
                                 <option value="Shopify">Shopify</option>
@@ -133,7 +134,8 @@
                     <div class="row g-3 align-items-center mb-3">
                         <div class="col-6">
                             <label class="form-label">Payment Type</label>
-                            <select class="form-select" name="paymenttype" aria-label="Default select example">
+                            <select class="form-select" name="paymenttype" id="paymenttype"
+                                aria-label="Default select example">
                                 <option selected>Choose Payment Type</option>
                                 <option value="Monthly">Monthly</option>
                                 <option value="Hourly">Hourly</option>
@@ -146,7 +148,8 @@
                         </div>
                         <div class="col-6">
                             <label class="form-label">Assigned To:</label>
-                            <select class="form-select" name="paymenttype" aria-label="Default select example">
+                            <select class="form-select" name="manager_name" id="manager_name"
+                                aria-label="Default select example">
                                 <option selected>Choose Manager</option>
                                 @foreach ($managers as $manager)
                                     <option value="{{ $manager->id }}">{{ $manager->fullname }}</option>
@@ -154,22 +157,50 @@
                             </select>
                         </div>
                     </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Add Project</button>
-            </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Add Project</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>
 
 
-{{-- <script>
-    var dateToday = new Date();
-    var dates = $("#eddate").datepicker({
-        defaultDate: dateToday,
-        changeMonth: true,
-        minDate: dateToday,
+<script>
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
     });
-</script> --}}
+
+    jQuery(document).on('submit', '#projectaddform', function(e) {
+        e.preventDefault();
+        var projectname = $('#projectname').val();
+        var client_name = $('#client_name').val();
+        var techonology = $('#techonology').val();
+        var paymenttype = $('#paymenttype').val();
+        var enddate = $('#enddate').val();
+        var manager_name = $('#manager_name').val();
+
+        // console.log(projectname, client_name);
+        
+        $.ajax({
+            type: "post",
+            url: "{{ route('superamdin.projects.add') }}",
+            data: {
+                projectname: projectname,
+                client_name: client_name,
+                techonology: techonology,
+                paymenttype: paymenttype,
+                enddate: enddate,
+                manager_name: manager_name
+            },
+            dataType: "json",
+            success: function (response) {
+                console.log(response);
+            }
+        });
+    });
+</script>

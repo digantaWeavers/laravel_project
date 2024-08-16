@@ -2,7 +2,7 @@
 @php
     $user = Auth::user();
 @endphp
-<main class="main-wrapper col-md-9 ms-sm-auto py-4 col-lg-9 px-md-4 border-start">
+<main class="main-wrapper col-md-10 col-lg-10 ms-sm-auto py-4 col-lg-9 px-md-4 border-start">
     <div class="title-group mb-3">
         <h1 class="h2 mb-0">Overview</h1>
 

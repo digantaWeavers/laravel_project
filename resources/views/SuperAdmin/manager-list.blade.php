@@ -1,6 +1,6 @@
 @include('SuperAdmin/header')
 
-<main class="main-wrapper col-md-9 ms-sm-auto py-4 col-lg-9 px-md-4 border-start">
+<main class="main-wrapper col-md-10 col-lg-10 ms-sm-auto py-4 col-lg-9 px-md-4 border-start">
     <div class="title-group mb-3">
         <h1 class="h2 mb-0">Project Managers</h1>
     </div>
@@ -13,7 +13,12 @@
                         <div>
                             <p>Total Managers</p>
 
-                            <small class="text-muted">20</small>
+                            @php
+                                $dataArray = json_decode($managers, true);
+                                $totalCount = count($dataArray);
+                            @endphp
+
+                            <small class="text-muted">{{ $totalCount }}</small>
                         </div>
                     </div>
 
@@ -46,7 +51,6 @@
                             <th>Email Id</th>
                             <th>Phone Number</th>
                             <th>View</th>
-                            <th>Edit</th>
                             <th>Delete</th>
                         </tr>
                     </thead>
@@ -63,13 +67,10 @@
                                 <td>{{ $manager->emailaddress }}</td>
                                 <td>{{ $manager->mobileno }}</td>
                                 <td>
-                                    <a href=""><i class="bi bi-eye"></i></a>
+                                    <a href="{{ route('single.manager.view.superadmin', $manager->id) }}"><i class="bi bi-eye"></i></a>
                                 </td>
                                 <td>
-                                    <a href=""><i class="bi bi-pen"></i></a>
-                                </td>
-                                <td>
-                                    <a href=""><i class="bi bi-trash"></i></a>
+                                    <a href="{{ route('superamdin.manager.delete', $manager->id) }}"><i class="bi bi-trash"></i></a>
                                 </td>
                             </tr>
                             @php

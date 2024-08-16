@@ -49,4 +49,8 @@ class OtherUser extends Model
             'password' => 'hashed',
         ];
     }
+
+    public function managername(){
+        return $this->hasOne(User::class, 'id', 'added_by');
+    }
 }

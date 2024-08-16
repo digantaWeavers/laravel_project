@@ -242,4 +242,32 @@ class SuperAdminController extends Controller
             return back()->with('error', 'Register Unsuccessfull');
         }
     }
+
+    // single manager view by super admin
+    public function ManagerSingleView(string $id){
+        $manager = OtherUser::with('managername')->find($id);
+        return view('SuperAdmin/managerDetailsView', compact('manager'));
+    }
+
+    // delete single manager by super admin 
+    public function MnagerDelete(string $id){
+        $managerDelete = OtherUser::find($id)->delete();
+        if($managerDelete){
+            return back()->with('success', 'Delete Successfull');
+        }else{
+            return back()->with('error', 'Delete Failed');
+        }
+    }
+
+    public function projectAdd(Request $request){
+        return $request->validate([
+            'projectname' => 'required',
+            'client_name' => 'required',
+            'techonology' => 'required',
+            'paymenttype' => 'required',
+            'enddate' => 'required',
+            'manager_name' => 'required',
+        ]);
+
+    }
 }

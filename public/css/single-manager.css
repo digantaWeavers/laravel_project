@@ -1,0 +1,119 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+.manager-view{
+    font-family: "Roboto", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.header {
+    background-image: url('https://brainwavesindia.com/wp-content/uploads/2021/01/brainwaves-website-pages-_06-01-2021-_-02.jpg');
+    background-size: cover;
+    background-position: center;
+    height: 250px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    position: relative;
+}
+
+.profile {
+    text-align: center;
+    padding: 20px;
+    /* background-color: rgba(0, 0, 0, 0.5);  */
+    border-radius: 10px;
+    display: inline-block;
+}
+
+.profile-pic {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    border: 2px solid white;
+}
+
+.status {
+    background-color: #e74c3c;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 15px;
+    display: inline-block;
+    margin-top: 10px;
+    font-size: 14px;
+}
+
+h2,
+h3,
+h4 {
+    margin: 10px 0;
+    color: white;
+}
+
+a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+.profile-info {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 65px;
+    margin-top: 65px;
+}
+
+.profile-info h2, h3, h4{
+    font-size: 15px;
+}
+
+.container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 20px;
+    max-width: 1200px;
+    margin: auto;
+}
+
+.card {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+}
+
+.row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.item{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #0000001c;
+    padding-bottom: 11px;
+}
+
+.report {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.other_details h2{
+    color: black;
+    font-size: 20px;
+    margin: 0px 0px 25px 0px;
+}

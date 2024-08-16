@@ -8,7 +8,9 @@
     <meta name="description" content="">
     <meta name="author" content="Tooplate">
 
-    <title>Mini Finance Dashboard Template</title>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
+    <title>Weavers Web Project Management</title>
 
     <!-- CSS FILES -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -107,7 +109,7 @@
 
     <div class="container-fluid">
         <div class="row">
-            <nav id="sidebarMenu" class="col-md-3 col-lg-3 d-md-block sidebar collapse">
+            <nav id="sidebarMenu" class="col-md-2 col-lg-2 d-md-block sidebar collapse">
                 <div class="position-sticky py-4 px-3 sidebar-sticky">
                     <ul class="nav flex-column h-100">
                         <li class="nav-item">
@@ -118,7 +120,7 @@
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link @if((Route::currentRouteName() == 'superadmin.manager.list.view') || (Route::currentRouteName() == 'superamdin.manager.list')) active @endif" aria-current="page" href="{{ route('superadmin.manager.list.view') }}">
+                            <a class="nav-link @if((Route::currentRouteName() == 'superadmin.manager.list.view') || (Route::currentRouteName() == 'single.manager.view.superadmin')) active @endif" aria-current="page" href="{{ route('superadmin.manager.list.view') }}">
                                 <i class="bi-house-fill me-2"></i>
                                 Manager
                             </a>
