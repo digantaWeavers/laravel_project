@@ -45,7 +45,7 @@ Route::controller(SuperAdminController::class)->group(function(){
 
     Route::get('superadmin/manager/{id}/view', 'ManagerSingleView')->name('single.manager.view.superadmin');    // single manager profile view
 
-    Route::get('superadmin/manager/{id}/delete', 'MnagerDelete')->name('superamdin.manager.delete');    // manager delete
+    Route::get('superadmin/manager/{id}/delete', 'ManagerDelete')->name('superamdin.manager.delete');    // manager delete
 
     Route::get('superadmin/projects', 'managerList')->name('superamdin.projects.view.list');    // super admin manager list view
 

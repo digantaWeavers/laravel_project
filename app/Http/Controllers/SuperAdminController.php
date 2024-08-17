@@ -250,7 +250,7 @@ class SuperAdminController extends Controller
     }
 
     // delete single manager by super admin 
-    public function MnagerDelete(string $id){
+    public function ManagerDelete(string $id){
         $managerDelete = OtherUser::find($id)->delete();
         if($managerDelete){
             return back()->with('success', 'Delete Successfull');
