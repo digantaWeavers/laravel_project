@@ -5,6 +5,7 @@
 <script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
 <script src="{{ asset('js/apexcharts.min.js') }}"></script>
 <script src="{{ asset('js/custom.js') }}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
 
 <script type="text/javascript">
     new DataTable('#example', {

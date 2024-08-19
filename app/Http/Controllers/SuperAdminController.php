@@ -258,16 +258,4 @@ class SuperAdminController extends Controller
             return back()->with('error', 'Delete Failed');
         }
     }
-
-    public function projectAdd(Request $request){
-        return $request->validate([
-            'projectname' => 'required',
-            'client_name' => 'required',
-            'techonology' => 'required',
-            'paymenttype' => 'required',
-            'enddate' => 'required',
-            'manager_name' => 'required',
-        ]);
-
-    }
 }

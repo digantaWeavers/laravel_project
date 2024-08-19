@@ -9,6 +9,8 @@ class Project extends Model
 {
     use HasFactory;
 
+    public $timestamps = false;
+
     protected $fillable = [
         'projectId',
         'project_name',
@@ -16,6 +18,10 @@ class Project extends Model
         'techonology',
         'payment_type',
         'enddate',
-        'add_by'
+        'assign_to'
     ];
+
+    public function ManagerDetails(){
+        return $this->hasOne(OtherUser::class, 'id', 'assign_to');
+    }
 }

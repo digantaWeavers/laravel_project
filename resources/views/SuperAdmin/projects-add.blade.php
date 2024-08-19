@@ -25,49 +25,42 @@
                     </div>
                 </div>
 
-                <div class="d-flex flex-wrap align-items-center">
-                    <div class="custom-block-transation-detail-item mt-4">
-                        <h6>Transation ID</h6>
+                <div id="alert_status"></div>
 
-                        <p>283J3S0EL023</p>
-                    </div>
-
-                    <div class="custom-block-transation-detail-item mt-4 mx-auto px-4">
-                        <h6>Description</h6>
-
-                        <p>Shopee</p>
-                    </div>
-
-                    <div class="custom-block-transation-detail-item mt-4 ms-lg-auto px-lg-3 px-md-3">
-                        <h6>Payment Type</h6>
-
-                        <p>C2C Transfer</p>
-                    </div>
-
-                    <div class="custom-block-transation-detail-item mt-4 ms-auto me-auto">
-                        <h6>Amounts</h6>
-
-                        <p>$280</p>
-                    </div>
-
-                    <div class="custom-block-transation-detail-item mt-4 ms-auto me-auto">
-                        <h6>Amounts</h6>
-
-                        <p>$280</p>
-                    </div>
-
-                    <div class="custom-block-transation-detail-item mt-4 ms-auto me-auto">
-                        <h6>Amounts</h6>
-
-                        <p>$280</p>
-                    </div>
-
-                    <div class="custom-block-transation-detail-item mt-4 ms-auto me-auto">
-                        <h6>Amounts</h6>
-
-                        <p>$280</p>
-                    </div>
-                </div>
+                <table id="example" class="display" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th>Sl No.</th>
+                            <th>Employee ID</th>
+                            <th>Name</th>
+                            <th>Username</th>
+                            <th>Email Id</th>
+                            <th>Phone Number</th>
+                            <th>View</th>
+                            <th>Delete</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{-- @php
+                            $key = 1;
+                        @endphp
+                        @foreach ($managers as $manager) --}}
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        {{-- @php
+                                $key++;
+                            @endphp
+                        @endforeach --}}
+                    </tbody>
+                </table>
 
             </div>
         </div>
@@ -109,11 +102,13 @@
                     <div class="mb-3">
                         <label class="form-label">Project Name</label>
                         <input type="text" name="projectname" id="projectname" class="form-control">
+                        <div class="text-danger" id="pnameerror"></div>
                     </div>
                     <div class="row g-3 align-items-center mb-3">
                         <div class="col-6">
                             <label class="form-label">Client Name</label>
                             <input type="text" name="client_name" id="client_name" class="form-control">
+                            <div class="text-danger" id="cnameerror"></div>
                         </div>
                         <div class="col-6">
                             <label class="form-label">Techonology</label>
@@ -129,6 +124,7 @@
                                 <option value="Flutter">Flutter (Mobile App)</option>
                                 <option value="ReactJs">ReactJs (Mobile App)</option>
                             </select>
+                            <div class="text-danger" id="techonologyerror"></div>
                         </div>
                     </div>
                     <div class="row g-3 align-items-center mb-3">
@@ -141,10 +137,12 @@
                                 <option value="Hourly">Hourly</option>
                                 <option value="Fixed">Fixed</option>
                             </select>
+                            <div class="text-danger" id="paymenterror"></div>
                         </div>
                         <div class="col-6">
                             <label class="form-label">End Date</label>
                             <input type="date" name="enddate" id="enddate" class="form-control">
+                            <div class="text-danger" id="endateerror"></div>
                         </div>
                         <div class="col-6">
                             <label class="form-label">Assigned To:</label>
@@ -155,13 +153,14 @@
                                     <option value="{{ $manager->id }}">{{ $manager->fullname }}</option>
                                 @endforeach
                             </select>
+                            <div class="text-danger" id="managererror"></div>
                         </div>
                     </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Add Project</button>
-                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">Add Project</button>
+            </div>
             </form>
         </div>
     </div>
@@ -185,10 +184,24 @@
         var manager_name = $('#manager_name').val();
 
         // console.log(projectname, client_name);
-        
+
+        // if(projectname == ""){
+        //     $('#pnameerror').text("Project Name Should Be Field");
+        // }if(client_name == ""){
+        //     $('#cnameerror').text("Client Name Should Be Field");
+        // }if(techonology == ""){
+        //     $('#techonologyerror').text("Techonology Should Be Choosen");
+        // }if(paymenttype == ""){
+        //     $('#paymenterror').text("Payment Type Should Be Choosen");
+        // }if(enddate == ""){
+        //     $('#endateerror').text("End Date Should Be Field");
+        // }if(manager_name == ""){
+        //     $('#managererror').text("Manager Should Be Choosen");
+        // }
+
         $.ajax({
             type: "post",
-            url: "{{ route('superamdin.projects.add') }}",
+            url: "{{ route('projects.store') }}",
             data: {
                 projectname: projectname,
                 client_name: client_name,
@@ -198,9 +211,38 @@
                 manager_name: manager_name
             },
             dataType: "json",
-            success: function (response) {
+            success: function(response) {
                 console.log(response);
+                if(response == 1){
+                    $('#staticBackdrop').modal('hide');
+                    $('#alert_status').html('<div class="alert alert-success" role="alert">Project Add Successfull</div>');
+                    $('#projectaddform')[0].reset();
+                }else{
+                    $('#staticBackdrop').modal('hide');
+                    $('#alert_status').html('<div class="alert alert-danger" role="alert">Project Add Unsuccessfull</div>');
+                }
             }
+            // error: function(xhr, ) {
+            //     console.log(xhr.responseJSON.errors.projectname);
+            //     // if (xhr.responseJSON.errors.projectname) {
+            //     //     $('#pnameerror').text(xhr.responseJSON.errors.projectname);
+            //     // }
+            //     // if (xhr.responseJSON.errors.client_name) {
+            //     //     $('#cnameerror').text(xhr.responseJSON.errors.client_name);
+            //     // }
+            //     // if (xhr.responseJSON.errors.techonology) {
+            //     //     $('#techonologyerror').text(xhr.responseJSON.errors.techonology);
+            //     // }
+            //     // if (xhr.responseJSON.errors.paymenttype) {
+            //     //     $('#paymenterror').text(xhr.responseJSON.errors.paymenttype);
+            //     // }
+            //     // if (xhr.responseJSON.errors.enddate) {
+            //     //     $('#endateerror').text(xhr.responseJSON.errors.enddate);
+            //     // }
+            //     // if (xhr.responseJSON.errors.manager_name) {
+            //     //     $('#managererror').text(xhr.responseJSON.errors.manager_name);
+            //     // }
+            // }
         });
     });
 </script>
