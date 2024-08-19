@@ -50,9 +50,6 @@ Route::controller(SuperAdminController::class)->group(function(){
     Route::get('superadmin/projects', 'managerList')->name('superamdin.projects.view.list');    // super admin manager list view
 
     Route::post('superadmin/projects/add', 'projectAdd')->name('superamdin.projects.add');    // super admin manager list view
-
-
-
 });
 
 Route::resource('/project', ProjectController::class);
