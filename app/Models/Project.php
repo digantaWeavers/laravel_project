@@ -18,10 +18,15 @@ class Project extends Model
         'techonology',
         'payment_type',
         'enddate',
-        'assign_to'
+        'assign_to',
+        'assign_by'
     ];
 
     public function ManagerDetails(){
         return $this->hasOne(OtherUser::class, 'id', 'assign_to');
+    }
+
+    public function SuperAdminDetails(){
+        return $this->hasMany(User::class, 'id', 'assign_by');
     }
 }

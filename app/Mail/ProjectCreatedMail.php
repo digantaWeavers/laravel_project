@@ -13,16 +13,24 @@ class ProjectCreatedMail extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $project;
-    public $manager;
+    public $managerName;
+    public $projectName;
+    public $clientName;
+    public $techonology;
+    public $endDate;
+    public $superAdminName;
 
     /**
      * Create a new message instance.
      */
-    public function __construct($project, $manager)
+    public function __construct($managerName, $projectName, $clientName, $techonology, $endDate, $superAdminName)
     {
-        $this->project = $project;
-        $this->manager = $manager;
+        $this->managerName = $managerName;
+        $this->projectName = $projectName;
+        $this->clientName = $clientName;
+        $this->techonology = $techonology;
+        $this->endDate = $endDate;
+        $this->superAdminName = $superAdminName;
     }
 
     /**
@@ -31,20 +39,20 @@ class ProjectCreatedMail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Project Created Mail',
+            subject: 'New Project Assigned',
         );
     }
 
-    public function build()
-    {
-        return $this->subject('New Project Assigned')
-                    ->view('Mail.project_assign')
-                    ->with([
-                        'projectName' => $this->project->project_name,
-                        'clientName' => $this->project->client_name,
-                        'endDate' => $this->project->enddate,
-                    ]);
-    }
+    // public function build()
+    // {
+    //     return $this->subject('New Project Assigned')
+    //                 ->view('Mail.project_assign')
+    //                 ->with([
+    //                     'projectName' => $this->project->project_name,
+    //                     'clientName' => $this->project->client_name,
+    //                     'endDate' => $this->project->enddate,
+    //                 ]);
+    // }
 
     /**
      * Get the message content definition.
@@ -52,7 +60,7 @@ class ProjectCreatedMail extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'view.name',
+            view: 'Mail.project_assign',
         );
     }
 

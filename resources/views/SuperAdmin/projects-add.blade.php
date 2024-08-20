@@ -31,37 +31,41 @@
                     <thead>
                         <tr>
                             <th>Sl No.</th>
-                            <th>Employee ID</th>
-                            <th>Name</th>
-                            <th>Username</th>
-                            <th>Email Id</th>
-                            <th>Phone Number</th>
-                            <th>View</th>
-                            <th>Delete</th>
+                            <th>Project ID</th>
+                            <th>Project Name</th>
+                            <th>Client Name</th>
+                            <th>Techonology</th>
+                            <th>Paymenttype</th>
+                            <th>EndDate</th>
+                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {{-- @php
+                        @php
                             $key = 1;
                         @endphp
-                        @foreach ($managers as $manager) --}}
-                        <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        {{-- @php
+                        @foreach ($projectLists as $project)
+                            <tr>
+                                <td>{{ $key }}</td>
+                                <td>{{ $project->projectId }}</td>
+                                <td>{{ $project->project_name }}</td>
+                                <td>{{ $project->client_name }}</td>
+                                <td>{{ $project->techonology }}</td>
+                                <td>{{ $project->payment_type }}</td>
+                                <td>{{ $project->enddate }}</td>
+                                <td>
+                                    <a href="#costumModal10" role="button" class="btn btn-default"
+                                        data-toggle="modal"><i class="bi bi-eye"></i></a>
+                                    <a href=""><i class="bi bi-pen"></i></a>
+                                    <a href=""><i class="bi bi-trash"></i></a>
+                                </td>
+                            </tr>
+                            @php
                                 $key++;
                             @endphp
-                        @endforeach --}}
+                        @endforeach
                     </tbody>
                 </table>
-
             </div>
         </div>
     </div>
@@ -80,7 +84,6 @@
     </footer>
 </main>
 
-
 @include('SuperAdmin/footer')
 
 
@@ -97,7 +100,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form id="projectaddform" action="" method="POST">
+                <form id="projectaddform" method="POST">
                     @csrf
                     <div class="mb-3">
                         <label class="form-label">Project Name</label>
@@ -156,10 +159,12 @@
                             <div class="text-danger" id="managererror"></div>
                         </div>
                     </div>
+                    <input type="hidden" id="assigned_by" name="assigned_by" value="{{ Auth::user()->id }}">
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-primary">Add Project</button>
+                <button type="button" class="btn btn-secondary" id="close"
+                    data-bs-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary" id="add">Add Project</button>
             </div>
             </form>
         </div>
@@ -182,24 +187,9 @@
         var paymenttype = $('#paymenttype').val();
         var enddate = $('#enddate').val();
         var manager_name = $('#manager_name').val();
+        var assigned_by = $('#assigned_by').val();
 
-        // console.log(projectname, client_name);
-
-        // if(projectname == ""){
-        //     $('#pnameerror').text("Project Name Should Be Field");
-        // }if(client_name == ""){
-        //     $('#cnameerror').text("Client Name Should Be Field");
-        // }if(techonology == ""){
-        //     $('#techonologyerror').text("Techonology Should Be Choosen");
-        // }if(paymenttype == ""){
-        //     $('#paymenterror').text("Payment Type Should Be Choosen");
-        // }if(enddate == ""){
-        //     $('#endateerror').text("End Date Should Be Field");
-        // }if(manager_name == ""){
-        //     $('#managererror').text("Manager Should Be Choosen");
-        // }
-
-        $.ajax({
+        jQuery.ajax({
             type: "post",
             url: "{{ route('projects.store') }}",
             data: {
@@ -208,41 +198,50 @@
                 techonology: techonology,
                 paymenttype: paymenttype,
                 enddate: enddate,
-                manager_name: manager_name
+                manager_name: manager_name,
+                assigned_by: assigned_by
             },
             dataType: "json",
+            beforeSend: function() {
+                jQuery('#add').text('Loading...');
+                jQuery('#add').attr('disabled', 'true');
+                jQuery('#close').attr('disabled', 'true');
+            },
             success: function(response) {
-                console.log(response);
-                if(response == 1){
+                // console.log(response);
+                if (response == 1) {
                     $('#staticBackdrop').modal('hide');
-                    $('#alert_status').html('<div class="alert alert-success" role="alert">Project Add Successfull</div>');
+                    $('#alert_status').html(
+                        '<div class="alert alert-success" role="alert">Project Add Successfull</div>'
+                    );
                     $('#projectaddform')[0].reset();
-                }else{
+                } else {
                     $('#staticBackdrop').modal('hide');
-                    $('#alert_status').html('<div class="alert alert-danger" role="alert">Project Add Unsuccessfull</div>');
+                    $('#alert_status').html(
+                        '<div class="alert alert-danger" role="alert">Project Add Unsuccessfull</div>'
+                    );
+                }
+            },
+            error: function(xhr) {
+                if (xhr.responseJSON.errors.projectname) {
+                    $('#pnameerror').text(xhr.responseJSON.errors.projectname);
+                }
+                if (xhr.responseJSON.errors.client_name) {
+                    $('#cnameerror').text(xhr.responseJSON.errors.client_name);
+                }
+                if (xhr.responseJSON.errors.techonology) {
+                    $('#techonologyerror').text(xhr.responseJSON.errors.techonology);
+                }
+                if (xhr.responseJSON.errors.paymenttype) {
+                    $('#paymenterror').text(xhr.responseJSON.errors.paymenttype);
+                }
+                if (xhr.responseJSON.errors.enddate) {
+                    $('#endateerror').text(xhr.responseJSON.errors.enddate);
+                }
+                if (xhr.responseJSON.errors.manager_name) {
+                    $('#managererror').text(xhr.responseJSON.errors.manager_name);
                 }
             }
-            // error: function(xhr, ) {
-            //     console.log(xhr.responseJSON.errors.projectname);
-            //     // if (xhr.responseJSON.errors.projectname) {
-            //     //     $('#pnameerror').text(xhr.responseJSON.errors.projectname);
-            //     // }
-            //     // if (xhr.responseJSON.errors.client_name) {
-            //     //     $('#cnameerror').text(xhr.responseJSON.errors.client_name);
-            //     // }
-            //     // if (xhr.responseJSON.errors.techonology) {
-            //     //     $('#techonologyerror').text(xhr.responseJSON.errors.techonology);
-            //     // }
-            //     // if (xhr.responseJSON.errors.paymenttype) {
-            //     //     $('#paymenterror').text(xhr.responseJSON.errors.paymenttype);
-            //     // }
-            //     // if (xhr.responseJSON.errors.enddate) {
-            //     //     $('#endateerror').text(xhr.responseJSON.errors.enddate);
-            //     // }
-            //     // if (xhr.responseJSON.errors.manager_name) {
-            //     //     $('#managererror').text(xhr.responseJSON.errors.manager_name);
-            //     // }
-            // }
         });
     });
 </script>
