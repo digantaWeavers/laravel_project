@@ -7,6 +7,7 @@ use App\Models\OtherUser;
 use App\Models\Project;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
+use SebastianBergmann\CodeCoverage\Report\Xml\Project as XmlProject;
 
 class ProjectController extends Controller
 {
@@ -90,7 +91,8 @@ class ProjectController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $project = Project::with('ManagerDetails')->find($id);
+        return $project;
     }
 
     /**
@@ -98,7 +100,8 @@ class ProjectController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $projectEdit = Project::with('ManagerDetails')->find($id);
+        return $projectEdit;
     }
 
     /**
@@ -106,7 +109,38 @@ class ProjectController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $request->validate([
+            'pname' => 'required',
+            'cupdatename' => 'required',
+            'techupdate' => 'required',
+            'paytype' => 'required',
+            'finishdate' => 'required',
+            'manager' => 'required'
+        ],[
+           'pname.required' => 'Project Name Should Be Field',
+           'cupdatename.required' => 'Client Name Should Be Field',
+           'techupdate.required' => 'Techonology Should Be Choosen',
+           'paytype.required' => 'Payment Type Should Be Choosen',
+           'finishdate.required' => 'End Date Should Be Field',
+           'manager.required' => 'Manager Should Be Choosen',
+        ]);
+
+        $projectUpdate = Project::find($id);
+
+        $projectUpdate->project_name = $request->pname;
+        $projectUpdate->client_name = $request->cupdatename;
+        $projectUpdate->techonology = $request->techupdate;
+        $projectUpdate->payment_type = $request->paytype;
+        $projectUpdate->enddate = $request->finishdate;
+        $projectUpdate->assign_to = $request->manager;
+
+        $projectUpdate->save();
+
+        if($projectUpdate){
+            return 1;
+        }else{
+            return 0;
+        }
     }
 
     /**
@@ -114,6 +148,11 @@ class ProjectController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $projectDelete = Project::find($id)->delete();
+        if($projectDelete){
+            return 1;
+        }else{
+            return 0;
+        }
     }
 }
