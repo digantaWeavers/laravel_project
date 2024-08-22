@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Mail\WeclcomeManagerMail;
+use App\Models\Project;
 use Illuminate\Support\Facades\Mail;
 
 class SuperAdminController extends Controller
@@ -95,7 +96,9 @@ class SuperAdminController extends Controller
     // redirect to dashboard page if user login
     public function dashboardPage(){
         if(Auth::check()){
-            return view('SuperAdmin/dashboard');
+            $managerCount = OtherUser::where('userrole', 'Manager')->count();
+            $projectListCount = Project::orderBy('id', 'desc')->count();
+            return view('SuperAdmin/dashboard', compact('managerCount', 'projectListCount'));
         }else{
             return redirect()->route('superamdin.login');
         }

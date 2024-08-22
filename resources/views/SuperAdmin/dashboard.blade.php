@@ -16,8 +16,7 @@
                     <div class="card custom-block bg-white">
                         <div class="card-body">
                             <h5 class="card-title">Total Projects</h5>
-                            <p class="card-text">10</p>
-                            {{-- <a href="" class="btn btn-info"><i class="bi-plus"></i> Add Project</a> --}}
+                            <p class="card-text">{{ $projectListCount }}</p>
                         </div>
                     </div>
                 </div>
@@ -26,8 +25,7 @@
                     <div class="card custom-block bg-white">
                         <div class="card-body">
                             <h5 class="card-title">Total Managers</h5>
-                            <p class="card-text">20</p>
-                            {{-- <a href="" class="btn btn-info"><i class="bi-plus"></i> Add Manager</a> --}}
+                            <p class="card-text">{{ $managerCount }}</p>
                         </div>
                     </div>
                 </div>
@@ -49,7 +47,6 @@
                         <div class="card-body">
                             <h5 class="card-title">Total Employees</h5>
                             <p class="card-text">20</p>
-                            {{-- <a href="" class="btn btn-info"><i class="bi-plus"></i> Add Employee</a> --}}
                         </div>
                     </div>
                 </div>

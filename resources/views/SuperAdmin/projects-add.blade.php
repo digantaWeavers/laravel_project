@@ -18,8 +18,7 @@
                     </div>
 
                     <div class="ms-auto">
-                        <button type="button" class="btn btn-primary custom-btn" data-bs-toggle="modal"
-                            data-bs-target="#staticBackdrop">
+                        <button type="button" class="btn btn-primary custom-btn" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
                             Add Project
                         </button>
                     </div>
@@ -312,53 +311,6 @@
         }
     });
 
-    // jQuery(document).ready(function () {
-    //     displayData();
-    // });
-
-    // function displayData(){
-    //     var table = $('#example').DataTable({
-    //         processing: true,
-    //         serverSide: true,
-    //         ajax: {
-    //             url: '/projects',
-    //             type: 'GET',
-    //             dataSrc: function(json) {
-    //                 return json.map(function(project, index) {
-    //                     // Format the date
-    //                     let date = new Date(project.enddate);
-    //                     let enddate = ("0" + date.getDate()).slice(-2) + "-" + ("0" + (date.getMonth() + 1)).slice(-2) + "-" + date.getFullYear();
-
-    //                     return [
-    //                         index + 1,
-    //                         project.projectId,
-    //                         project.project_name,
-    //                         project.client_name,
-    //                         project.techonology,
-    //                         project.payment_type,
-    //                         enddate,
-    //                         '<button type="button" class="btn btn-primary viewButton" data-projectId="' + project.id + '" data-bs-toggle="modal" data-bs-target="#exampleModal">View</button>',
-    //                         '<button type="button" class="btn btn-secondary editButton" data-projectId="' + project.id + '" data-bs-toggle="modal" data-bs-target="#exampleModal1">Edit</button>',
-    //                         '<button type="button" class="btn btn-danger deleteButton" data-projectId="' + project.id + '">Delete</button>'
-    //                     ];
-    //                 });
-    //             }
-    //         },
-    //         columns: [
-    //             { title: "Sl No." },
-    //             { title: "Project ID" },
-    //             { title: "Project Name" },
-    //             { title: "Client Name" },
-    //             { title: "Technology" },
-    //             { title: "Payment Type" },
-    //             { title: "End Date" },
-    //             { title: "View" },
-    //             { title: "Edit" },
-    //             { title: "Delete" }
-    //         ]
-    //     });
-    // }
-
     // project add ajax
     jQuery(document).on('submit', '#projectaddform', function(e) {
         e.preventDefault();
@@ -396,6 +348,9 @@
                         '<div class="alert alert-success" role="alert">Project Add Successfull</div>'
                     );
                     $('#projectaddform')[0].reset();
+                    setTimeout(() => {
+                        location.reload();
+                    }, 1000);
                 } else {
                     $('#staticBackdrop').modal('hide');
                     $('#alert_status').html(
