@@ -34,6 +34,8 @@
     <link href="{{ asset('css/tooplate-mini-finance.css') }}" rel="stylesheet">
 </head>
 
+{{-- @include('sweetalert::alert') --}}
+
 @php
     $user = Auth::user();
 @endphp
@@ -127,7 +129,7 @@
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link @if(Route::currentRouteName() == 'superamdin.projects.view.list') active @endif" href="{{ route('superamdin.projects.view.list') }}">
+                            <a class="nav-link @if(Route::currentRouteName() == 'projects.index') active @endif" href="{{ route('projects.index') }}">
                                 <i class="bi-wallet me-2"></i>
                                 Projects
                             </a>
