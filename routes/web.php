@@ -14,9 +14,9 @@ Route::get('/', function () {
 // })->name('superamdin.projects.view.list');
 
 // super admin view
-// Route::get('superadmin/mangers/add', function(){
-//     return view('SuperAdmin/manager-add');
-// })->name('superamdin.manager.list');
+Route::get('team-leads', function(){
+    return view('SuperAdmin/teamLead');
+})->name('superamdin.team-leads');
 
 
 // Super Admin Controller Group 
@@ -41,7 +41,7 @@ Route::controller(SuperAdminController::class)->group(function(){
     
     Route::post('/superadmin/user/add', 'SuperAdminOtherUsersRegistration')->name('superadmin.others.user.add'); // others user registartion by super admin
 
-    Route::get('superadmin/manager/list', 'managerListSuperAdmin')->name('superadmin.manager.list.view');    // super admin manager list view
+    Route::get('/managers', 'managerListSuperAdmin')->name('superadmin.manager.list.view');    // super admin manager list view
 
     Route::get('superadmin/manager/{id}/view', 'ManagerSingleView')->name('single.manager.view.superadmin');    // single manager profile view
 
@@ -52,4 +52,4 @@ Route::controller(SuperAdminController::class)->group(function(){
     // Route::post('superadmin/projects/add', 'projectAdd')->name('superamdin.projects.add');    // super admin manager list view
 });
 
-Route::resource('/projects', ProjectController::class);
+Route::resource('/projects', ProjectController::class); // project controller

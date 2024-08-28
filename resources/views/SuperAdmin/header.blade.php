@@ -123,14 +123,21 @@
 
                         <li class="nav-item">
                             <a class="nav-link @if((Route::currentRouteName() == 'superadmin.manager.list.view') || (Route::currentRouteName() == 'single.manager.view.superadmin')) active @endif" aria-current="page" href="{{ route('superadmin.manager.list.view') }}">
-                                <i class="bi-house-fill me-2"></i>
+                                <i class="bi bi-person-circle"></i>
                                 Manager
                             </a>
                         </li>
 
                         <li class="nav-item">
+                            <a class="nav-link @if(Route::currentRouteName() == 'superamdin.team-leads') active @endif"  aria-current="page" href="{{ route('superamdin.team-leads') }}">
+                                <i class="bi bi-person-bounding-box"></i>
+                                Team Lead
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
                             <a class="nav-link @if(Route::currentRouteName() == 'projects.index') active @endif" href="{{ route('projects.index') }}">
-                                <i class="bi-wallet me-2"></i>
+                                <i class="bi bi-bookmark-check-fill"></i>
                                 Projects
                             </a>
                         </li>

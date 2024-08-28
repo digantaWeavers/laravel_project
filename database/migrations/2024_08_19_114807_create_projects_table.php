@@ -20,7 +20,9 @@ return new class extends Migration
             $table->string('payment_type');
             $table->date('enddate');
             $table->unsignedBigInteger('assign_to');
-            $table->foreign('assign_to')->references('id')->on('users')->cascadeOnUpdate()->cascadeOnDelete();
+            $table->foreign('assign_to')->references('id')->on('other_users')->cascadeOnUpdate()->cascadeOnDelete();
+            $table->unsignedBigInteger('assign_by');
+            $table->foreign('assign_by')->references('id')->on('users')->cascadeOnUpdate()->cascadeOnDelete();
         });
     }
 
