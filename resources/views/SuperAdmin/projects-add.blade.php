@@ -515,7 +515,7 @@
         
     });
 
-    // project form update
+    // project form delete
     jQuery(document).on('click', '.deleteButton', function(e) {
         e.preventDefault();
         var projectid = jQuery(this).attr('data-projectId');

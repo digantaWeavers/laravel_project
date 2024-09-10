@@ -129,7 +129,7 @@
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link @if(Route::currentRouteName() == 'superamdin.teamleads') active @endif"  aria-current="page" href="{{ route('superamdin.teamleads') }}">
+                            <a class="nav-link @if((Route::currentRouteName() == 'superamdin.teamleads') || (Route::currentRouteName() == 'single.teamLead.view')) active @endif"  aria-current="page" href="{{ route('superamdin.teamleads') }}">
                                 <i class="bi bi-person-bounding-box"></i>
                                 Team Lead
                             </a>

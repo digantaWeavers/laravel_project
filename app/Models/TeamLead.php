@@ -33,6 +33,17 @@ class TeamLead extends Model
         'empstatus',
         'source_hire',
         'joinning_date',
+        'manager_assign',
         'added_by'
     ];
+
+    // added by
+    public function managername(){
+        return $this->hasOne(User::class, 'id', 'added_by');
+    }
+
+    // manager assigned
+    public function managerassigned(){
+        return $this->hasOne(OtherUser::class, 'id', 'manager_assign');
+    }
 }

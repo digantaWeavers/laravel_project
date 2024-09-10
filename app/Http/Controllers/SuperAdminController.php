@@ -274,7 +274,8 @@ class SuperAdminController extends Controller
     // teamlead display
     public function TeamLeadDisplay(){
         $teamLeads = TeamLead::orderBy('id', 'desc')->get();
-        return view('SuperAdmin/teamLead', compact('teamLeads'));
+        $managers = OtherUser::all();
+        return view('SuperAdmin/teamLead', compact('teamLeads', 'managers'));
     }
 
     // teamlead add
@@ -283,7 +284,9 @@ class SuperAdminController extends Controller
             'fullname' => 'required',
             'username' => 'required|unique:team_leads,emailaddress',
             'emailaddress' => 'required|email|unique:team_leads,emailaddress',
+            // 'phonenumber' => 'required',
             'phonenumber' => 'required',
+            'manager' => 'required',
             'password' => 'required|confirmed',
             'password_confirmation' => 'required'
         ]);
@@ -299,6 +302,7 @@ class SuperAdminController extends Controller
         $teamLead->username = $request->username;
         $teamLead->emailaddress = $request->emailaddress;
         $teamLead->mobileno = $request->phonenumber;
+        $teamLead->manager_assign = $request->manager;
         $teamLead->password = $request->password;
         $teamLead->added_by = $request->added_by;
 
@@ -327,9 +331,26 @@ class SuperAdminController extends Controller
     }
 
     //single lead view
-    public function TeamLeadView($id){
-        $teamLead = TeamLead::find($id);
-        return view('SuperAdmin/teamLead', compact('teamLead'));
+    public function TeamLeadView(string $id){
+        $teamLead = TeamLead::with('managername','managerassigned')->find($id);
+        return view('SuperAdmin/singleTeamLeadView', compact('teamLead'));
+        // return $teamLead;
+    }
+
+    // single team lead delete
+    public function TeamLeadDelete(string $id){
+        $teamLead = TeamLead::find($id)->delete();
+        if($teamLead){
+            return response()->json([
+                'status' => true,
+                'message' => 'Delete Successfull'
+            ], 200);
+        }else{
+            return response()->json([
+                'status' => false,
+                'message' => 'Delete Failed'
+            ], 401);
+        }
     }
 
 

@@ -12,14 +12,14 @@
                     class="profile-pic">
             @endif
             <div class="profile-info">
-                <h2>{{ $manager->empId }} - {{ $manager->fullname }}</h2>
-                @if (!empty($manager->designation))
-                    <h3>{{ $manager->designation }}</h3>
+                <h2>{{ $teamLead->empId }} - {{ $teamLead->fullname }}</h2>
+                @if (!empty($teamLead->designation))
+                    <h3>{{ $teamLead->designation }}</h3>
                 @endif
-                @if (!empty($manager->depertment))
-                    <h4>{{ $manager->depertment }}</h4>
+                @if (!empty($teamLead->depertment))
+                    <h4>{{ $teamLead->depertment }}</h4>
                 @endif
-                <a href="mailto:{{ $manager->emailaddress }}">{{ $manager->emailaddress }}</a>
+                <a href="mailto:{{ $teamLead->emailaddress }}">{{ $teamLead->emailaddress }}</a>
             </div>
         </div>
     </div>
@@ -32,32 +32,32 @@
                 <div class="content">
                     <div class="item">
                         <span>Employee ID:</span>
-                        @if (!empty($manager->empId))
-                            {{ $manager->empId }}
+                        @if (!empty($teamLead->empId))
+                            {{ $teamLead->empId }}
                         @else
                             -
                         @endif
                     </div>
                     <div class="item">
                         <span>Full Name:</span>
-                        @if (!empty($manager->fullname))
-                            {{ $manager->fullname }}
+                        @if (!empty($teamLead->fullname))
+                            {{ $teamLead->fullname }}
                         @else
                             -
                         @endif
                     </div>
                     <div class="item">
                         <span>Username:</span>
-                        @if (!empty($manager->username))
-                            {{ $manager->username }}
+                        @if (!empty($teamLead->username))
+                            {{ $teamLead->username }}
                         @else
                             -
                         @endif
                     </div>
                     <div class="item">
                         <span>Email ID:</span>
-                        @if (!empty($manager->emailaddress))
-                            {{ $manager->emailaddress }}
+                        @if (!empty($teamLead->emailaddress))
+                            {{ $teamLead->emailaddress }}
                         @else
                             -
                         @endif
@@ -73,48 +73,48 @@
                 <div class="content">
                     <div class="item">
                         <span>Date Of Birth:</span>
-                        @if (!empty($manager->dob))
-                            {{ $manager->dob }}
+                        @if (!empty($teamLead->dob))
+                            {{ $teamLead->dob }}
                         @else
                             -
                         @endif
                     </div>
                     <div class="item">
                         <span>Marital Status:</span>
-                        @if (!empty($manager->marriedstatus))
-                            {{ $manager->marriedstatus }}
+                        @if (!empty($teamLead->marriedstatus))
+                            {{ $teamLead->marriedstatus }}
                         @else
                             -
                         @endif
                     </div>
                     <div class="item">
                         <span>Address:</span>
-                        @if (!empty($manager->address))
-                            {{ $manager->address }}
+                        @if (!empty($teamLead->address))
+                            {{ $teamLead->address }}
                         @else
                             -
                         @endif
                     </div>
                     <div class="item">
                         <span>Addhar Card:</span>
-                        @if (!empty($manager->addharno))
-                            {{ $manager->addharno }}
+                        @if (!empty($teamLead->addharno))
+                            {{ $teamLead->addharno }}
                         @else
                             -
                         @endif
                     </div>
                     <div class="item">
                         <span>Pan Card:</span>
-                        @if (!empty($manager->pancardno))
-                            {{ $manager->pancardno }}
+                        @if (!empty($teamLead->pancardno))
+                            {{ $teamLead->pancardno }}
                         @else
                             -
                         @endif
                     </div>
                     <div class="item">
                         <span>Passport Number:</span>
-                        @if (!empty($manager->passportno))
-                            {{ $manager->passportno }}
+                        @if (!empty($teamLead->passportno))
+                            {{ $teamLead->passportno }}
                         @else
                             -
                         @endif
@@ -130,64 +130,72 @@
                 <div class="content">
                     <div class="item">
                         <span>Department:</span>
-                        @if (!empty($manager->depertment))
-                            {{ $manager->depertment }}
+                        @if (!empty($teamLead->depertment))
+                            {{ $teamLead->depertment }}
                         @else
                             -
                         @endif
                     </div>
                     <div class="item">
                         <span>Location:</span>
-                        @if (!empty($manager->location))
-                            {{ $manager->location }}
+                        @if (!empty($teamLead->location))
+                            {{ $teamLead->location }}
                         @else
                             -
                         @endif
                     </div>
                     <div class="item">
                         <span>Designation:</span>
-                        @if (!empty($manager->designation))
-                            {{ $manager->designation }}
+                        @if (!empty($teamLead->designation))
+                            {{ $teamLead->designation }}
                         @else
                             -
                         @endif
                     </div>
                     <div class="item">
                         <span>Experience:</span>
-                        @if (!empty($manager->experience))
-                            {{ $manager->experience }}
+                        @if (!empty($teamLead->experience))
+                            {{ $teamLead->experience }}
                         @else
                             -
                         @endif
                     </div>
                     <div class="item">
                         <span>Employment Type:</span>
-                        @if (!empty($manager->emptype))
-                            {{ $manager->emptype }}
+                        @if (!empty($teamLead->emptype))
+                            {{ $teamLead->emptype }}
                         @else
                             -
                         @endif
                     </div>
                     <div class="item">
                         <span>Employee Status:</span>
-                        @if (!empty($manager->empstatus))
-                            {{ $manager->empstatus }}
+                        @if (!empty($teamLead->empstatus))
+                            {{ $teamLead->empstatus }}
                         @else
                             -
                         @endif
                     </div>
                     <div class="item">
                         <span>Source of Hire:</span>
-                        @if (!empty($manager->source_hire))
-                            {{ $manager->source_hire }}
+                        @if (!empty($teamLead->source_hire))
+                            {{ $teamLead->source_hire }}
                         @else
                             -
                         @endif
                     </div>
                     <div class="item">
                         <span>Date of Joining:</span>
-                        @if (!empty($manager->joinning_date))
-                            {{ $manager->joinning_date }}
+                        @if (!empty($teamLead->joinning_date))
+                            {{ $teamLead->joinning_date }}
+                        @else
+                            -
+                        @endif
+                    </div>
+                    <div class="item">
+                        <span>Manager Assigned:</span>
+                        @if (!empty($teamLead->manager_assign))
+                            {{ $teamLead->managerassigned->fullname }}
                         @else
                             -
                         @endif
@@ -203,30 +211,30 @@
                 <div class="content">
                     <div class="item">
                         <span>Personal Phone Number:</span>
-                        @if (!empty($manager->mobileno))
-                            {{ $manager->mobileno }}
+                        @if (!empty($teamLead->mobileno))
+                            {{ $teamLead->mobileno }}
                         @else
                             -
                         @endif
                     </div>
                     <div class="item">
                         <span>Alternative Phone Number:</span>
-                        @if (!empty($manager->alternativephone))
-                            {{ $manager->alternativephone }}
+                        @if (!empty($teamLead->alternativephone))
+                            {{ $teamLead->alternativephone }}
                         @else
                             -
                         @endif
                     </div>
                     <div class="item">
                         <span>Alternative Email Address:</span>
-                        @if (!empty($manager->alternativeemail))
-                            {{ $manager->alternativeemail }}
+                        @if (!empty($teamLead->alternativeemail))
+                            {{ $teamLead->alternativeemail }}
                         @else
                             -
                         @endif
                     </div>
                     <div class="item">
-                        <span>Added By:</span> {{ $manager->managername->fullname }}
+                        <span>Added By:</span> {{ $teamLead->managername->fullname }}
                     </div>
                 </div>
             </div>

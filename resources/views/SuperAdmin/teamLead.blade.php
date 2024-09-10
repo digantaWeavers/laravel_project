@@ -64,10 +64,13 @@
                                 <td>{{ $teamLead->emailaddress }}</td>
                                 <td>{{ $teamLead->mobileno }}</td>
                                 <td>
-                                    <a href="{{ route('single.manager.view.superadmin', $teamLead->id) }}"><i class="bi bi-eye"></i></a>
+                                    <a href="{{ route('single.teamLead.view', $teamLead->id) }}"><i class="bi bi-eye"></i></a>
                                 </td>
                                 <td>
-                                    <a href="{{ route('superamdin.manager.delete', $teamLead->id) }}"><i class="bi bi-trash"></i></a>
+                                    {{-- <a href="{{ route('single.teamLead.delete', $teamLead->id) }}"><i class="bi bi-trash"></i></a> --}}
+                                    <button type="button" class="btn btn-danger deleteButton" data-leadId="{{ $teamLead->id }}">
+                                        <i class="bi bi-trash"></i>
+                                    </button>
                                 </td>
                             </tr>
                             @php
@@ -126,6 +129,13 @@
                         <input type="text" name="phonenumber" id="phonenumber" class="form-control" placeholder="Mobile Number"
                             value="{{ old('phonenumber') }}" />
                         <p id="number"></p>
+                        <select name="manager" id="manager" class="form-select">
+                            <option value="">Choose Manager</option>
+                            @foreach ($managers as $manager)
+                                <option value="{{ $manager->id }}">{{ $manager->fullname }}</option>
+                            @endforeach
+                        </select>
+                        <p id="manager"></p>
                         <input type="password" name="password" id="password" class="form-control" placeholder="Create Password"
                             value="{{ old('password') }}" />
                         <p id="pass"></p>
@@ -159,6 +169,7 @@
         var username = $('#username').val();
         var emailaddress = $('#emailaddress').val();
         var phonenumber = $('#phonenumber').val();
+        var manager = $('#manager').val();
         var password = $('#password').val();
         var password_confirmation = $('#password_confirmation').val();
 
@@ -171,6 +182,7 @@
                 username: username,
                 emailaddress: emailaddress,
                 phonenumber: phonenumber,
+                manager: manager,
                 password: password,
                 password_confirmation: password_confirmation
             },
@@ -215,5 +227,39 @@
                 }
             }
         });
+    });
+
+    // Team Lead delete
+    jQuery(document).on('click', '.deleteButton', function(e) {
+        e.preventDefault();
+        var leadId = jQuery(this).attr('data-leadId');
+        
+        if(confirm("Are You Sure To Delete?")){
+            jQuery.ajax({
+                type: "DELETE",
+                url: "/superadmin/teamlead/delete/" + leadId,
+                data: {
+                    leadId: leadId,
+                },
+                dataType: "json",
+                success: function (response) {
+                    if (response.status == true) {
+                        // $('.view_modal').modal('hide');
+                        $('.message').html(
+                            '<div class="alert alert-success" role="alert">'+ response.message +'</div>'
+                        );
+                        setTimeout(() => {
+                            location.reload();
+                        }, 1000);
+                    } else {
+                        // $('.view_modal').modal('hide');
+                        $('.message').html(
+                            '<div class="alert alert-danger" role="alert">'+ response.message +'</div>'
+                        );
+                    }
+                }
+            });
+        }
+        
     });
 </script>

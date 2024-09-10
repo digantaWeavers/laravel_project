@@ -7,15 +7,16 @@
 }
 
 .header {
-    background-image: url('https://brainwavesindia.com/wp-content/uploads/2021/01/brainwaves-website-pages-_06-01-2021-_-02.jpg');
+    /* background-image: url('https://brainwavesindia.com/wp-content/uploads/2021/01/brainwaves-website-pages-_06-01-2021-_-02.jpg');
     background-size: cover;
     background-position: center;
-    height: 250px;
+    height: 250px; */
     display: flex;
     align-items: center;
     justify-content: center;
+    background-color: rebeccapurple;
     color: white;
-    position: relative;
+    /* position: relative; */
 }
 
 .profile {

@@ -61,6 +61,10 @@ Route::controller(SuperAdminController::class)->group(function(){
 
     Route::post('superadmin/teamlead/add', 'TeamLeadAdd')->name('teamLead.add.superadmin');    // team lead add
 
+    Route::get('superadmin/teamlead/view/{id}', 'TeamLeadView')->name('single.teamLead.view');    // single team lead view
+
+    Route::delete('superadmin/teamlead/delete/{id}', 'TeamLeadDelete')->name('single.teamLead.delete');    // single team lead delete
+
 
     // =====================================manager protflio details=========================================== //
 
