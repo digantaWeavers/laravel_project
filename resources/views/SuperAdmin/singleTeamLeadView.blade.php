@@ -5,8 +5,8 @@
 <main class="main-wrapper col-md-10 col-lg-10 ms-sm-auto py-4 col-lg-9 px-md-4 border-start manager-view">
     <div class="header">
         <div class="profile">
-            @if (!empty($manager->profilepic))
-                <img src="{{ asset('/storage/' . $manager->profilepic) }}" alt="Profile Picture" class="profile-pic">
+            @if (!empty($teamLead->profilepic))
+                <img src="{{ asset('/storage/' . $teamLead->profilepic) }}" alt="Profile Picture" class="profile-pic">
             @else
                 <img src="https://avatar.iran.liara.run/public/boy?username=Ash" alt="Profile Picture"
                     class="profile-pic">

@@ -14,9 +14,9 @@ Route::get('/', function () {
 // })->name('superamdin.projects.view.list');
 
 // super admin view
-Route::get('team-leads', function(){
-    return view('SuperAdmin/teamLead');
-})->name('superamdin.team-leads');
+// Route::get('team-leads', function(){
+//     return view('SuperAdmin/teamLead');
+// })->name('superamdin.teamleads');
 
 
 // Super Admin Controller Group 
@@ -38,6 +38,8 @@ Route::controller(SuperAdminController::class)->group(function(){
     Route::post('superadmin/{id}/profile/update', 'superAdminProfileUpdate')->name('superadmin.profile.update');    // super admin profile update
 
     Route::post('superadmin/{id}/password/update', 'superAdminPasswordUpdate')->name('superadmin.password.update');    // super admin profile update
+
+    // =====================================manager protflio details=========================================== //
     
     Route::post('/superadmin/user/add', 'SuperAdminOtherUsersRegistration')->name('superadmin.others.user.add'); // others user registartion by super admin
 
@@ -49,7 +51,19 @@ Route::controller(SuperAdminController::class)->group(function(){
 
     Route::get('superadmin/projects', 'managerList')->name('superamdin.projects.view.list');    // super admin manager list view
 
-    // Route::post('superadmin/projects/add', 'projectAdd')->name('superamdin.projects.add');    // super admin manager list view
+    // =====================================manager protflio details=========================================== //
+
+
+
+    // =====================================manager protflio details=========================================== //
+
+    Route::get('superadmin/teamlead', 'TeamLeadDisplay')->name('superamdin.teamleads');   // team lead list view
+
+    Route::post('superadmin/teamlead/add', 'TeamLeadAdd')->name('teamLead.add.superadmin');    // team lead add
+
+
+    // =====================================manager protflio details=========================================== //
+
 });
 
 Route::resource('/projects', ProjectController::class); // project controller

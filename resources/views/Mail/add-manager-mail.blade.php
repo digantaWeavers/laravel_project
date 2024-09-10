@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Welcome Mail</title>
 </head>
 <body>
     <h3>Welcome to Weavers-web. Your account has been created successfull</h3>

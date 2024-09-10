@@ -8,7 +8,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Mail\WeclcomeManagerMail;
+use App\Mail\welcomeTeamLead;
 use App\Models\Project;
+use App\Models\TeamLead;
 use Illuminate\Support\Facades\Mail;
 
 class SuperAdminController extends Controller
@@ -177,6 +179,9 @@ class SuperAdminController extends Controller
 
     }
 
+
+    // ============================Manager Portal Relate Function=========================== //
+
     // all manager lis view in super admin manager tab
     public function managerListSuperAdmin(){
         $managers = OtherUser::where('userrole', 'Manager')->orderBy('id', 'desc')->get();
@@ -261,4 +266,75 @@ class SuperAdminController extends Controller
             return back()->with('error', 'Delete Failed');
         }
     }
+
+    // ============================Manager Portal Relate Function=========================== //
+
+    // ============================Team Lead Portal Relate Function=========================== //
+
+    // teamlead display
+    public function TeamLeadDisplay(){
+        $teamLeads = TeamLead::orderBy('id', 'desc')->get();
+        return view('SuperAdmin/teamLead', compact('teamLeads'));
+    }
+
+    // teamlead add
+    public function TeamLeadAdd(Request $request){
+        $request->validate([
+            'fullname' => 'required',
+            'username' => 'required|unique:team_leads,emailaddress',
+            'emailaddress' => 'required|email|unique:team_leads,emailaddress',
+            'phonenumber' => 'required',
+            'password' => 'required|confirmed',
+            'password_confirmation' => 'required'
+        ]);
+
+        // return 123;
+
+        $TLemployeeId = 'TL'.rand(001, 100000);
+
+        $teamLead = new TeamLead();
+
+        $teamLead->empId = $TLemployeeId;
+        $teamLead->fullname = $request->fullname;
+        $teamLead->username = $request->username;
+        $teamLead->emailaddress = $request->emailaddress;
+        $teamLead->mobileno = $request->phonenumber;
+        $teamLead->password = $request->password;
+        $teamLead->added_by = $request->added_by;
+
+        $teamLead->save();
+
+        if($teamLead){
+            $toMail = $request->emailaddress;
+            $subject = "Account Created Successfull";
+            $emailAddress = $request->emailaddress;
+            $username = $request->username;
+            $password = $request->password;
+
+            Mail::to($toMail)->send(new WeclcomeManagerMail($subject, $emailAddress, $username, $password));
+
+            return response()->json([
+                'status' => true,
+                'message' => 'Team Lead Details Add Successfull',
+            ], 200);
+        }else{
+            return response()->json([
+                'status' => false,
+                'message' => 'Team Lead Details Add Failed'
+            ], 400);
+        }
+
+    }
+
+    //single lead view
+    public function TeamLeadView($id){
+        $teamLead = TeamLead::find($id);
+        return view('SuperAdmin/teamLead', compact('teamLead'));
+    }
+
+
+
+
+    // ============================Team Lead Portal Relate Function=========================== //
+
 }
