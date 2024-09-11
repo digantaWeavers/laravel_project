@@ -55,7 +55,7 @@ Route::controller(SuperAdminController::class)->group(function(){
 
 
 
-    // =====================================manager protflio details=========================================== //
+    // =====================================Team Lead protflio details=========================================== //
 
     Route::get('superadmin/teamlead', 'TeamLeadDisplay')->name('superamdin.teamleads');   // team lead list view
 
@@ -63,10 +63,25 @@ Route::controller(SuperAdminController::class)->group(function(){
 
     Route::get('superadmin/teamlead/view/{id}', 'TeamLeadView')->name('single.teamLead.view');    // single team lead view
 
-    Route::delete('superadmin/teamlead/delete/{id}', 'TeamLeadDelete')->name('single.teamLead.delete');    // single team lead delete
+    Route::post('superadmin/teamlead/manager/{id}/change', 'TeamLeadManagerChange')->name('manager.change.admin');    // manager change in team lead single view
+
+    Route::get('superadmin/teamlead/{id}/delete', 'TeamLeadDelete')->name('single.teamLead.delete');    // single team lead delete
+
+    // =====================================Team Lead protflio details=========================================== //
 
 
-    // =====================================manager protflio details=========================================== //
+
+    // =====================================employee protflio details=========================================== //
+
+    Route::get('superadmin/employee', 'EmployeeView')->name('superamdin.employee.list');   // team lead list view
+
+    Route::post('superadmin/employee/add', 'EmployeeAdd')->name('superamdin.employee.add');   // team lead list view
+
+    Route::get('superadmin/employee/{id}/view', 'singleEmployeeView')->name('superadmin.single.employee.view');   // team lead list view
+    
+    Route::post('superadmin/employee/lead/{id}/change', 'EmployeeLeadChange')->name('superadmin.single.employee.change');   // team lead change in single lead view
+
+    // =====================================employee protflio details=========================================== //
 
 });
 

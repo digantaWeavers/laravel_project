@@ -136,6 +136,13 @@
                         </li>
 
                         <li class="nav-item">
+                            <a class="nav-link @if((Route::currentRouteName() == 'superamdin.employee.list') || (Route::currentRouteName() == 'superadmin.single.employee.view')) active @endif"  aria-current="page" href="{{ route('superamdin.employee.list') }}">
+                                <i class="bi bi-person"></i>
+                                Employee
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
                             <a class="nav-link @if(Route::currentRouteName() == 'projects.index') active @endif" href="{{ route('projects.index') }}">
                                 <i class="bi bi-bookmark-check-fill"></i>
                                 Projects

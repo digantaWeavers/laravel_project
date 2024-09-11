@@ -102,6 +102,7 @@ a:hover {
 .item{
     display: flex;
     justify-content: space-between;
+    align-items: center;
     margin-bottom: 10px;
     border-bottom: 1px solid #0000001c;
     padding-bottom: 11px;
@@ -117,4 +118,16 @@ a:hover {
     color: black;
     font-size: 20px;
     margin: 0px 0px 25px 0px;
+}
+
+.manager-ass{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 278px;
+}
+
+.manager-ass a{
+    color: #0000009c;
+    font-weight: normal;
 }

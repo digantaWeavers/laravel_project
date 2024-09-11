@@ -36,8 +36,7 @@
                     <div class="card custom-block bg-white">
                         <div class="card-body">
                             <h5 class="card-title">Total TeamLeads</h5>
-                            <p class="card-text">10</p>
-                            {{-- <a href="" class="btn btn-info"><i class="bi-plus"></i> Add Lead</a> --}}
+                            <p class="card-text">{{ $leadCount }}</p>
                         </div>
                     </div>
                 </div>
@@ -46,7 +45,7 @@
                     <div class="card custom-block bg-white">
                         <div class="card-body">
                             <h5 class="card-title">Total Employees</h5>
-                            <p class="card-text">20</p>
+                            <p class="card-text">{{ $employeeCount }}</p>
                         </div>
                     </div>
                 </div>

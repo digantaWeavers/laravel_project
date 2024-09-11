@@ -17,16 +17,24 @@ class WeclcomeManagerMail extends Mailable
     public $mailEmail;
     public $mailUsername;
     public $mailPassword;
+    public $leadname;
+    public $managername;
 
     /**
      * Create a new message instance.
      */
-    public function __construct($subject, $emailAddress, $username, $password)
+    public function __construct($subject, $emailAddress, $username, $password, $leadname = null, $managername = null)
     {
         $this->mailsubject = $subject;
         $this->mailEmail = $emailAddress;
         $this->mailUsername = $username;
         $this->mailPassword = $password;
+        if (!is_null($leadname)) {
+            $this->leadname = $leadname;
+        }
+        if (!is_null($managername)) {
+            $this->managername = $managername;
+        }
     }
 
     /**

@@ -1,14 +1,14 @@
 @include('SuperAdmin/header')
 
 <style>
-    #teamLeadaddForm p{
+    #employeeaddForm p{
         color: red;
     }
 </style>
 
 <main class="main-wrapper col-md-10 col-lg-10 ms-sm-auto py-4 col-lg-9 px-md-4 border-start">
     <div class="title-group mb-3">
-        <h1 class="h2 mb-0">Team Lead</h1>
+        <h1 class="h2 mb-0">Employees</h1>
     </div>
 
     <div class="row my-4">
@@ -17,10 +17,10 @@
                 <div class="d-flex flex-wrap align-items-center border-bottom pb-3 mb-3">
                     <div class="d-flex align-items-center">
                         <div>
-                            <p>Total Lead</p>
+                            <p>Total Employees</p>
 
                             @php
-                                $dataArray = json_decode($teamLeads, true);
+                                $dataArray = json_decode($employess, true);
                                 $totalCount = count($dataArray);
                             @endphp
 
@@ -31,7 +31,7 @@
                     <div class="ms-auto">
                         <button type="button" class="btn btn-primary custom-btn" data-bs-toggle="modal"
                             data-bs-target="#staticBackdrop">
-                            Add Manager
+                            Add Employees
                         </button>
                     </div>
                 </div>
@@ -51,23 +51,25 @@
                             <th>Delete</th>
                         </tr>
                     </thead>
-                    <tbody id="teamLeadList">
+                    <tbody class="employeeList">
                         @php
                             $key = 1;
                         @endphp
-                        @foreach ($teamLeads as $teamLead)
+                        @foreach ($employess as $employee)
                             <tr>
                                 <td>{{ $key }}</td>
-                                <td>{{ $teamLead->empId }}</td>
-                                <td>{{ $teamLead->fullname }}</td>
-                                <td>{{ $teamLead->username }}</td>
-                                <td>{{ $teamLead->emailaddress }}</td>
-                                <td>{{ $teamLead->mobileno }}</td>
+                                <td>{{ $employee->empId }}</td>
+                                <td>{{ $employee->fullname }}</td>
+                                <td>{{ $employee->username }}</td>
+                                <td>{{ $employee->emailaddress }}</td>
+                                <td>{{ $employee->mobileno }}</td>
                                 <td>
-                                    <a href="{{ route('single.teamLead.view', $teamLead->id) }}"><i class="bi bi-eye"></i></a>
+                                    <a href="{{ route('superadmin.single.employee.view', $employee->id) }}"><i class="bi bi-eye"></i></a>
                                 </td>
                                 <td>
-                                    <a href="{{ route('single.teamLead.delete', $teamLead->id) }}"><i class="bi bi-trash"></i></a>
+                                    <button type="button" class="btn btn-danger deleteButton" data-leadId="{{ $employee->id }}">
+                                        <i class="bi bi-trash"></i>
+                                    </button>
                                 </td>
                             </tr>
                             @php
@@ -107,37 +109,31 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="staticBackdropLabel">Add Team Lead</h1>
+                <h1 class="modal-title fs-5" id="staticBackdropLabel">Add Employees</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form method="POST" id="teamLeadaddForm">
+                <form method="POST" id="employeeaddForm">
                         @csrf
                         <input type="hidden" name="added_by" id="added_by" value="{{ Auth()->user()->id }}">
-                        <input type="text" name="fullname" id="fullname" class="form-control" placeholder="Full Name"
-                            value="{{ old('fullname') }}" />
+                        <input type="text" name="fullname" id="fullname" class="form-control" placeholder="Full Name"/>
                         <p id="fname"></p>
-                        <input type="text" name="username" id="username" class="form-control" placeholder="Username"
-                            value="{{ old('username') }}" />
+                        <input type="text" name="username" id="username" class="form-control" placeholder="Username"/>
                         <p id="uname"></p>
-                        <input type="email" name="emailaddress" id="emailaddress" class="form-control" placeholder="Email Address"
-                            value="{{ old('emailaddress') }}" />
+                        <input type="email" name="emailaddress" id="emailaddress" class="form-control" placeholder="Email Address"/>
                         <p id="emaddress"></p>
-                        <input type="text" name="phonenumber" id="phonenumber" class="form-control" placeholder="Mobile Number"
-                            value="{{ old('phonenumber') }}" />
+                        <input type="text" name="phonenumber" id="phonenumber" class="form-control" placeholder="Mobile Number"/>
                         <p id="number"></p>
-                        <select name="manager" id="manager" class="form-select">
-                            <option value="">Choose Manager</option>
-                            @foreach ($managers as $manager)
-                                <option value="{{ $manager->id }}">{{ $manager->fullname }}</option>
+                        <select name="lead" id="lead" class="form-select">
+                            <option value="">Choose Team Lead</option>
+                            @foreach ($leads as $lead)
+                                <option value="{{ $lead->id }}">{{ $lead->fullname }}</option>
                             @endforeach
                         </select>
-                        <p id="manager"></p>
-                        <input type="password" name="password" id="password" class="form-control" placeholder="Create Password"
-                            value="{{ old('password') }}" />
+                        <p id="lead"></p>
+                        <input type="password" name="password" id="password" class="form-control" placeholder="Create Password"/>
                         <p id="pass"></p>
-                        <input type="password" name="password_confirmation" id="password_confirmation" class="form-control"
-                            placeholder="Confirm Password" />
+                        <input type="password" name="password_confirmation" id="password_confirmation" class="form-control"/>
                         <p id="cpass"></p>
                     </div>
                     <div class="modal-footer">
@@ -159,27 +155,27 @@
     });
 
     // Team Lead add
-    jQuery(document).on('submit', '#teamLeadaddForm', function(e){
+    jQuery(document).on('submit', '#employeeaddForm', function(e){
         e.preventDefault();
         var added_by = $('#added_by').val();
         var fullname = $('#fullname').val();
         var username = $('#username').val();
         var emailaddress = $('#emailaddress').val();
         var phonenumber = $('#phonenumber').val();
-        var manager = $('#manager').val();
+        var lead = $('#lead').val();
         var password = $('#password').val();
         var password_confirmation = $('#password_confirmation').val();
 
         $.ajax({
             type: "POST",
-            url: "{{ route('teamLead.add.superadmin') }}",
+            url: "{{ route('superamdin.employee.add') }}",
             data: {
                 added_by: added_by,
                 fullname: fullname,
                 username: username,
                 emailaddress: emailaddress,
                 phonenumber: phonenumber,
-                manager: manager,
+                lead: lead,
                 password: password,
                 password_confirmation: password_confirmation
             },
@@ -192,16 +188,49 @@
             success: function (response) {
                 console.log(response);
                 if(response.status == true){
-                    $('#teamLeadaddForm')[0].reset();
+                    $('#employeeaddForm')[0].reset();
                     $('.teamLeadaddModal').modal('hide');
-                    $('.message').html('<div class="alert alert-success" role="alert">'+ response.message +'</div>');
+                    $('.message').html('<div class="alert alert-success" role="alert">'+ response.message +'</div>'); 
                     setTimeout(() => {
                         location.reload();
                     }, 2000);
-                }else if(response.status == false){
+                    // var key = $('.employeeList tr').length + 1;
+
+                    // var newRow = `
+                    //     <tr>
+                    //         <td>${key}</td>
+                    //         <td>${response.data.empId}</td>
+                    //         <td>${response.data.fullname}</td>
+                    //         <td>${response.data.username}</td>
+                    //         <td>${response.data.emailaddress}</td>
+                    //         <td>${response.data.mobileno}</td>
+                    //         <td>
+                    //             <a href="/path/to/employee/view/${response.data.id}">
+                    //                 <i class="bi bi-eye"></i>
+                    //             </a>
+                    //         </td>
+                    //         <td>
+                    //             <button type="button" class="btn btn-danger deleteButton" data-leadId="${response.data.id}">
+                    //                 <i class="bi bi-trash"></i>
+                    //             </button>
+                    //         </td>
+                    //     </tr>`;
+
+                    // // Append new row to the table body
+                    // $('.employeeList').append(newRow);
+
+                    // setTimeout(() => {
+                    //     $('.message').html('');
+                    // }, 2000);
+                } else if(response.status == false) {
                     $('.teamLeadaddModal').modal('hide');
-                    $('.message').html('<div class="alert alert-error" role="alert">'+ response.message +'</div>');
+                    $('.message').html('<div class="alert alert-error" role="alert">' + response.message + '</div>');
                 }
+
+                // Re-enable the button
+                // $('.close').show();
+                // $('.addBtn').text('Add');
+                // $('.addBtn').attr('disabled', false);
             },
             error: function(xhr) {
                 if (xhr.responseJSON.errors.fullname) {
@@ -216,6 +245,9 @@
                 if (xhr.responseJSON.errors.phonenumber) {
                     $('#number').text(xhr.responseJSON.errors.phonenumber);
                 }
+                if (xhr.responseJSON.errors.manager) {
+                    $('#lead').text(xhr.responseJSON.errors.manager);
+                }
                 if (xhr.responseJSON.errors.password) {
                     $('#pass').text(xhr.responseJSON.errors.password);
                 }
@@ -225,4 +257,38 @@
             }
         });
     });
+
+    // Team Lead delete
+    // jQuery(document).on('click', '.deleteButton', function(e) {
+    //     e.preventDefault();
+    //     var leadId = jQuery(this).attr('data-leadId');
+        
+    //     if(confirm("Are You Sure To Delete?")){
+    //         jQuery.ajax({
+    //             type: "DELETE",
+    //             url: "/superadmin/teamlead/delete/" + leadId,
+    //             data: {
+    //                 leadId: leadId,
+    //             },
+    //             dataType: "json",
+    //             success: function (response) {
+    //                 if (response.status == true) {
+    //                     // $('.view_modal').modal('hide');
+    //                     $('.message').html(
+    //                         '<div class="alert alert-success" role="alert">'+ response.message +'</div>'
+    //                     );
+    //                     setTimeout(() => {
+    //                         location.reload();
+    //                     }, 1000);
+    //                 } else {
+    //                     // $('.view_modal').modal('hide');
+    //                     $('.message').html(
+    //                         '<div class="alert alert-danger" role="alert">'+ response.message +'</div>'
+    //                     );
+    //                 }
+    //             }
+    //         });
+    //     }
+        
+    // });
 </script>

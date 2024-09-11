@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class TeamLead extends Model
+class Employee extends Model
 {
     use HasFactory;
 
@@ -33,7 +33,7 @@ class TeamLead extends Model
         'empstatus',
         'source_hire',
         'joinning_date',
-        'manager_assign',
+        'lead_assign',
         'added_by'
     ];
 
@@ -49,8 +49,8 @@ class TeamLead extends Model
         return $this->hasOne(User::class, 'id', 'added_by');
     }
 
-    // manager assigned
-    public function managerassigned(){
-        return $this->hasOne(OtherUser::class, 'id', 'manager_assign');
+    // teamlead name
+    public function leadname(){
+        return $this->hasOne(TeamLead::class, 'id', 'lead_assign');
     }
 }

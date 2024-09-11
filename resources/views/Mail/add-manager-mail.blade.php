@@ -11,6 +11,12 @@
     <p><strong>Email Id:</strong> {{ $mailEmail }}</p>
     <p><strong>Username:</strong> {{ $mailUsername }}</p>
     <p><strong>Password:</strong> {{ $mailPassword }}</p>
-    <p>Please change your <strong>Password</strong> For scurity purpose.</p>
+    @if ($leadname)
+        <p>You have <strong>{{ $leadname }}</strong> Team Lead Assigned</p>
+    @endif
+    @if ($managername)
+        <p>You have <strong>{{ $managername }}</strong> Manager Assigned</p>
+    @endif
+    <p>Please change your <strong>Password</strong> For security purpose.</p>
 </body>
 </html>

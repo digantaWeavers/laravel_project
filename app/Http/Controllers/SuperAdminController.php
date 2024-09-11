@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Mail\WeclcomeManagerMail;
 use App\Mail\welcomeTeamLead;
+use App\Models\Employee;
 use App\Models\Project;
 use App\Models\TeamLead;
 use Illuminate\Support\Facades\Mail;
@@ -99,8 +100,10 @@ class SuperAdminController extends Controller
     public function dashboardPage(){
         if(Auth::check()){
             $managerCount = OtherUser::where('userrole', 'Manager')->count();
+            $leadCount = TeamLead::count();
+            $employeeCount = Employee::count();
             $projectListCount = Project::orderBy('id', 'desc')->count();
-            return view('SuperAdmin/dashboard', compact('managerCount', 'projectListCount'));
+            return view('SuperAdmin/dashboard', compact('managerCount', 'leadCount', 'employeeCount', 'projectListCount'));
         }else{
             return redirect()->route('superamdin.login');
         }
@@ -282,7 +285,7 @@ class SuperAdminController extends Controller
     public function TeamLeadAdd(Request $request){
         $request->validate([
             'fullname' => 'required',
-            'username' => 'required|unique:team_leads,emailaddress',
+            'username' => 'required|unique:team_leads,username',
             'emailaddress' => 'required|email|unique:team_leads,emailaddress',
             // 'phonenumber' => 'required',
             'phonenumber' => 'required',
@@ -315,7 +318,10 @@ class SuperAdminController extends Controller
             $username = $request->username;
             $password = $request->password;
 
-            Mail::to($toMail)->send(new WeclcomeManagerMail($subject, $emailAddress, $username, $password));
+            $manager = $teamLead->managerassigned;
+            $managername = $manager->fullname;
+
+            Mail::to($toMail)->send(new WeclcomeManagerMail($subject, $emailAddress, $username, $password, $managername));
 
             return response()->json([
                 'status' => true,
@@ -333,29 +339,127 @@ class SuperAdminController extends Controller
     //single lead view
     public function TeamLeadView(string $id){
         $teamLead = TeamLead::with('managername','managerassigned')->find($id);
-        return view('SuperAdmin/singleTeamLeadView', compact('teamLead'));
+        $managers = OtherUser::all();
+        return view('SuperAdmin/singleTeamLeadView', compact('teamLead', 'managers'));
         // return $teamLead;
+    }
+
+    // manager change in single team lead view
+    public function TeamLeadManagerChange(Request $request, string $id){
+        $changemanager = TeamLead::find($id);
+        $changemanager->manager_assign = $request->manager;
+        $changemanager->save();
+        if($changemanager){
+            return redirect()->back();
+        }else{
+            return redirect()->back();
+        }
     }
 
     // single team lead delete
     public function TeamLeadDelete(string $id){
         $teamLead = TeamLead::find($id)->delete();
         if($teamLead){
-            return response()->json([
-                'status' => true,
-                'message' => 'Delete Successfull'
-            ], 200);
+            // return response()->json([
+            //     'status' => true,
+            //     'message' => 'Delete Successfull'
+            // ], 200);
+            return redirect()->back();
         }else{
-            return response()->json([
-                'status' => false,
-                'message' => 'Delete Failed'
-            ], 401);
+            // return response()->json([
+            //     'status' => false,
+            //     'message' => 'Delete Failed'
+            // ], 401);
+
+            return redirect()->back();
         }
     }
 
 
-
-
     // ============================Team Lead Portal Relate Function=========================== //
+
+    // ============================Employee Portal Relate Function=========================== //
+
+    // employee list view
+    public function EmployeeView(){
+        $employess = Employee::all();
+        $leads = TeamLead::all();
+        return view('SuperAdmin/employee', compact('employess', 'leads'));
+    }
+
+    // employee add
+    public function EmployeeAdd(Request $request){
+        $request->validate([
+            'fullname' => 'required',
+            'username' => 'required|unique:employees,username',
+            'emailaddress' => 'required|email|unique:employees,emailaddress',
+            'phonenumber' => 'required',
+            'lead' => 'required',
+            'password' => 'required|confirmed',
+            'password_confirmation' => 'required'
+        ]);
+
+        $EmployeeId = 'TL'.rand(001, 100000);
+
+        $employe = new Employee();
+
+        $employe->empId = $EmployeeId;
+        $employe->fullname = $request->fullname;
+        $employe->username = $request->username;
+        $employe->emailaddress = $request->emailaddress;
+        $employe->mobileno = $request->phonenumber;
+        $employe->password = $request->password;
+        $employe->lead_assign = $request->lead;
+        $employe->added_by = $request->added_by;
+
+        $employe->save();
+
+        if($employe){
+            $toMail = $request->emailaddress;
+            $subject = "Account Created Successfull";
+            $emailAddress = $request->emailaddress;
+            $username = $request->username;
+            $password = $request->password;
+
+            $leadDetails = $employe->TeamLeadName;
+            $leadName = $leadDetails->fullname;
+
+            Mail::to($toMail)->send(new WeclcomeManagerMail($subject, $emailAddress, $username, $password, $leadName));
+
+            return response()->json([
+                'status' => true,
+                'message' => 'Employee Details Add Successfull',
+                'data' => $employe
+            ], 200);
+        }else{
+            return response()->json([
+                'status' => false,
+                'message' => 'Employee Details Add Failed'
+            ], 400);
+        }
+
+    }
+
+    // single employee view
+    public function singleEmployeeView(string $id){
+        $employee = Employee::with('managername', 'leadname')->find($id);
+        $teamleads = TeamLead::all();
+        return view('SuperAdmin/singleEmployee', compact('employee', 'teamleads'));
+    }
+
+    // manager change in single team lead view
+    public function EmployeeLeadChange(Request $request, string $id){
+        $changelead = Employee::find($id);
+        $changelead->lead_assign = $request->lead;
+        $changelead->save();
+        if($changelead){
+            return redirect()->back();
+        }else{
+            return redirect()->back();
+        }
+    }
+
+
+    // ============================Employee Portal Relate Function=========================== //
 
 }
